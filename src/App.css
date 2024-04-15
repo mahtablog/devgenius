@@ -1,0 +1,87 @@
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  overflow-x: hidden;
+}
+.btn1{
+  position: absolute;
+  z-index: 1;
+  color: white;
+  border-radius: 15px;
+  border: 0px;
+  transition: 0.1s;
+  right: 40%;
+  top: 84%;
+  transform: translate(-50%, -50%);
+  transform: rotate(0deg);
+  height: 10dvh;
+  width: 5dvw;
+}
+.btn2{
+  position: absolute;
+  z-index: 1;
+  height: 10dvh;
+  width: 5dvw;
+  color: white;
+  border-radius: 15px;
+  border: 0px;
+  transition: 0.1s;
+  left: 40%;
+  top: 84%;
+  transform: translate(-50%, -50%);
+  transform: rotate(180deg)
+}
+
+.btn:hover{
+  transform: scale(1.1);
+  transition: 0.1s;
+}
+.title{
+  position: absolute;
+  z-index: 1;
+  left: 50%;
+  top: 72%;
+  transform: translate(-50%, -50%);
+  color: white;
+  font-size: 3dvw;
+  font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+.title2{
+  position: absolute;
+  z-index: 1;
+  left: 50%;
+  top: 80%;
+  transform: translate(-50%, -50%);
+  color: white;
+  font-size: 1.5dvw;
+  width: 30%;
+  text-align: center;
+}
+.current{
+  position:absolute;
+  z-index:1;
+  font-size:50px;
+  left: 50%;
+  top: 90%;
+  color: white;
+  transform: translate(-50%, -50%);
+}
+.heading{
+  position: absolute;
+  z-index: 1;
+  width: 100dvw;
+  text-align: center;
+  top: 2vh;
+  color: white;
+  font-size: 3dvw;
+}
+.subheading{
+  color: white;
+  position: absolute;
+  z-index: 1;
+  width: 100dvw;
+  text-align: center;
+  top: 10vh;
+  font-size: 1.6dvw;
+}
