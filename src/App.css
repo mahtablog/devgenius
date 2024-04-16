@@ -166,3 +166,20 @@
   transform: scale(1.1);
   transition: 0.2s;
 }
+.slider{
+  position: absolute;
+  z-index: 122;
+  top: 80dvh;
+  height: 10dvh;
+  width: 30dvw;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  
+}
+.sliderbtn{
+  font-size: 20px;
+  width: 5dvw;
+  height: 4dvh;
+  border-radius: 10px;
+}
