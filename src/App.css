@@ -85,3 +85,84 @@
   top: 10vh;
   font-size: 1.6dvw;
 }
+.container {
+  position: absolute;
+  z-index: 1;
+  width: 100px; /* adjust as needed */
+  height: 100px; /* adjust as needed */
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  cursor: pointer;
+  overflow: hidden;
+}
+
+.container:hover .outline-circle{
+  height: 60px;
+  width: 60px;
+  transition: 0.2s;
+}
+.container:hover .outline-circle:nth-child(1){
+  height: 80px;
+  width: 80px;
+  transition: 0.2s;
+}
+.container:hover .outline-circle:nth-child(2){
+  height: 100px;
+  width: 100px;
+  transition: 0.2s;
+}
+.dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-color: black; /* or any color you want */
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.outline-circle {
+  transition: 0.2s;
+  
+  width: 50px; /* adjust as needed */
+  height: 50px; /* adjust as needed */
+  border-radius: 50%;
+  border: 1px solid black; /* or any color you want */
+  position: absolute;
+  top: 50%; /* adjust distance from dot */
+  left: 50%; /* adjust distance from dot */
+  transform: translate(-50%, -50%);
+}
+
+.outline-circle:nth-child(1) {
+  width: 70px; /* adjust as needed */
+  height: 70px; /* adjust as needed */
+  border-width: 2px;
+  transition: 0.2s;
+}
+
+.outline-circle:nth-child(2) {
+  width: 90px; /* adjust as needed */
+  height: 90px; /* adjust as needed */
+  border-width: 3px;
+  transition: 0.2s;
+}
+.enterbtn{
+  position: absolute;
+  z-index: 1;
+  bottom: 20dvh;
+  height: 5dvh;
+  width: 10dvw;
+  font-size: 2dvh;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: 0.2s;
+
+
+}
+.enterbtn:hover{
+  transform: scale(1.1);
+  transition: 0.2s;
+}

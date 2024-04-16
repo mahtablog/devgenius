@@ -1,13 +1,14 @@
 import './App.css'
 import { Canvas, useFrame,useThree } from '@react-three/fiber'
 import { Shape, ShapeGeometry } from 'three';
-import {Box,Sparkles, CameraControls, Environment, PerspectiveCamera, Sky,MeshPortalMaterial,Text, RoundedBox} from '@react-three/drei'
+import {Box,Sparkles, CameraControls, Environment, PerspectiveCamera, Sky,MeshPortalMaterial,Text, RoundedBox, Html} from '@react-three/drei'
 import { Children, useEffect, useRef, useState } from 'react'
 import gsap from "gsap";
 import * as THREE from 'three'
-import MainCar from './MainCar'
 import _ from 'lodash';
+import { Link, Route, Routes } from 'react-router-dom';
 function App() {
+
   const camera=useRef()
   const portal1=useRef()
   const portal2=useRef()
@@ -16,7 +17,7 @@ function App() {
   const portal5=useRef()
   const portal6=useRef()
   const control=useRef()
-  
+  const [circle,setCircle]=useState(true)
   const [overlay,setOverlay]=useState(true)
   const [scene1,setScene1]=useState(0)
   const [scene2,setScene2]=useState(0)
@@ -25,7 +26,7 @@ function App() {
   const [scene5,setScene5]=useState(0)
   const [scene6,setScene6]=useState(0)
   const [current,setCurrent]=useState(1)
-      const pos1=[-62,-18.5,65,0]
+      const pos1=[-62.5,-18.5,65,0]
       const pos2=[-52,-18.5,65,-30]
       const pos3=[-48,-18.5,84,-135]
       const pos4=[-60,-18.5,90,180]
@@ -39,6 +40,7 @@ function App() {
         const positions=[pos2,pos3,pos4,pos5,pos6,pos1]
         loopThroughPositions(positions)
         setCurrent(()=>6)
+        
       }
 
       if (current===2){
@@ -117,6 +119,8 @@ function App() {
     changePosition(portals[i],positions[i])
     rotatePortal(portals[i],positions[i][3])
     }
+    gsap.to(".container",{opacity:0,duration:0.5})
+    _.delay(()=>{gsap.to(".container",{opacity:1,duration:1})},500)
   }
   const changePosition=(portal,pos,portalToRotate,degree)=>{
     
@@ -164,26 +168,45 @@ const changeScene=(setScene)=>{
 }
   //minAzimuthAngle={-5*(Math.PI/180)} maxAzimuthAngle={5*(Math.PI/180)} minPolarAngle={90*(Math.PI/180)} maxPolarAngle={0*(Math.PI/180)} truckSpeed={0} maxDistance={5} minDistance={5} ref={control}
   return (
-    <>  {overlay && <h1 className='heading'>Heading one goes here</h1>}
+    <>
+    
+      <Routes>
+        <Route path='/Portal1'></Route>
+        <Route path='/Portal2'></Route>
+        <Route path='/Portal3'></Route>
+        <Route path='/Portal4'></Route>
+        <Route path='/Portal5'></Route>
+        <Route path='/Portal6'></Route>
+      </Routes>
+    
+    
+    
+      {overlay && <h1 className='heading'>Heading one goes here</h1>}
         {overlay && <h2 className='subheading'>Sub heading one goes here</h2>}
         {overlay && <h1 className='title' >Experience Luxury of portal {current}</h1>}
         {overlay && <h2 className='title2'>Explore a taste of sophistication with your favourite Spritzer.</h2>}
         {overlay && <img src='right-arrow.png' className='btn1' onClick={right} ></img>}
         {overlay && <img src='right-arrow.png' className='btn2' onClick={left} ></img>}
         {overlay && <h1 className='current' > {current}/6</h1>}
-        
+       <Link to={'Portal1'}> <div class="container">
+          <div class="dot"></div>
+          <div class="outline-circle"></div>
+          <div class="outline-circle"></div>
+        </div>
+        </Link>
+
         
      <div style={{height:'100dvh',width:'100dvw',display:'flex',justifyContent:"center",alignItems:"center"}}>
       <Canvas style={{background:'linear-gradient(90deg, rgba(245,182,168,1) 0%, rgba(241,121,96,1) 52%, rgba(249,213,206,1) 100%)'}}   >
         <PerspectiveCamera   ref={camera} position={[60,15,-73]} rotation={[0,0,0]}>
           <CameraControls  />
-
-
+            
+         
           <RoundedRectangle clicked={clicked} current={current} scale={[1,1,1]} position={pos1} rotation={pos1[3]} reference={portal1} portalNum={1} color={'hotpink'}>
             <MeshPortalMaterial   attach='material' resolution={2} side={THREE.DoubleSide} blend={scene1}>
               <color attach="background" args={['hotpink']} />
               <Text position={[2.5,6.5,1]} fontSize={0.8} an >Portal {1}</Text>
-              <MainCar position={[0,3,0]} scale={[1,1,1]}/>
+              
               <Environment preset='city'/>
             </MeshPortalMaterial>
           </RoundedRectangle>
@@ -192,7 +215,7 @@ const changeScene=(setScene)=>{
           <MeshPortalMaterial attach='material' resolution={2} side={THREE.DoubleSide} blend={scene2}>
               <color attach="background" args={['skyblue']} />
               <Text position={[2.5,6.5,1]} fontSize={0.8} an >Portal {2}</Text>
-              <MainCar position={[0,3,0]} scale={[1,1,1]}/>
+              
               <Environment preset='city'/>
             </MeshPortalMaterial>
           </RoundedRectangle>
@@ -201,7 +224,7 @@ const changeScene=(setScene)=>{
           <MeshPortalMaterial attach='material' resolution={2} side={THREE.DoubleSide} blend={scene3}>
               <color attach="background" args={['dodgerblue']} />
               <Text position={[2.5,6.5,1]} fontSize={0.8} an >Portal {3}</Text>
-              <MainCar position={[0,3,0]} scale={[1,1,1]}/>
+              
               <Environment preset='city'/>
             </MeshPortalMaterial>
           </RoundedRectangle>
@@ -210,7 +233,7 @@ const changeScene=(setScene)=>{
           <MeshPortalMaterial attach='material' resolution={2} side={THREE.DoubleSide} blend={scene4}>
               <color attach="background" args={['yellow']} />
               <Text position={[2.5,6.5,1]} fontSize={0.8} an >Portal {4}</Text>
-              <MainCar position={[0,3,0]} scale={[1,1,1]}/>
+              
               <Environment preset='city'/>
             </MeshPortalMaterial>
           </RoundedRectangle>
@@ -219,7 +242,7 @@ const changeScene=(setScene)=>{
           <MeshPortalMaterial attach='material' resolution={2} side={THREE.DoubleSide} blend={scene5}>
               <color attach="background" args={['orange']} />
               <Text position={[2.5,6.5,1]} fontSize={0.8} an >Portal {5}</Text>
-              <MainCar position={[0,3,0]} scale={[1,1,1]}/>
+              
               <Environment preset='city'/>
             </MeshPortalMaterial>
           </RoundedRectangle>
@@ -227,11 +250,11 @@ const changeScene=(setScene)=>{
           <MeshPortalMaterial attach='material' resolution={2} side={THREE.DoubleSide} blend={scene6}>
               <color attach="background" args={['black']} />
               <Text position={[2.5,6.5,1]} fontSize={0.8} an >Portal {6}</Text>
-              <MainCar position={[0,3,0]} scale={[1,1,1]}/>
+              
               <Environment preset='city'/>
             </MeshPortalMaterial>
           </RoundedRectangle>
-
+          
         <Sparkles position={[-60,-15,60]} size={15} scale={22} count={200} speed={1} color={'white'} />
         </PerspectiveCamera>
         

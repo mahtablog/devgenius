@@ -14,11 +14,16 @@
     "@react-three/fiber": "^8.16.1",
     "@types/three": "^0.163.0",
     "gsap": "^3.12.5",
+    "localforage": "^1.10.0",
     "lodash": "^4.17.21",
+    "match-sorter": "^6.3.4",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-router-dom": "^6.22.3",
+    "sort-by": "^1.2.0",
     "three": "^0.163.0",
-    "three-stdlib": "^2.29.6"
+    "three-stdlib": "^2.29.6",
+    "wouter": "^3.1.2"
   },
   "devDependencies": {
     "@types/react": "^18.2.66",
