@@ -8,28 +8,42 @@ export default function Portal1(){
     const camera=useRef()
     const [btn,setbtn]=useState(true)
     const [bottlescreen,setbottlescreen] = useState(false)
+    const [currentPhase,setCurrentPhase] = useState('enterScreen')
     const enter=()=>{
-        setbtn(false)
         gsap.to(camera.current.position,{z:-20})
         gsap.to(camera.current.position,{y:-5})
         gsap.to(camera.current.position,{x:35})
+        setCurrentPhase("pickScreen")
     }
     const openbottle=()=>{
-        console.log('clickeds')
+        
         gsap.to(".bottlescreen",{width:"75dvw"})
-        setbottlescreen(true)
+        setCurrentPhase('bottleScreen')
     }
     const closebottle=()=>{
         console.log('clickeds')
         //setbottlescreen(false)
         gsap.to(".bottlescreen",{width:"0dvw"})
-        
+        setCurrentPhase('pickScreen')
+
+    }
+    const openplaylist=()=>{
+            gsap.to('.lyricscreen',{height:'35dvh'})
+            gsap.to('.lyricscreen',{width:'30dvw'})
+            console.log('clicked')
+            setCurrentPhase('lyricsScreen')
+    }
+    const closeplaylist=()=>{
+            gsap.to('.lyricscreen',{height:'0dvh'})
+            gsap.to('.lyricscreen',{width:'0dvw'})
+            console.log('closed')
+            setCurrentPhase('pickScreen')
     }
     return(
         <div style={{height:'100dvh',width:'100dvw',display:'flex',justifyContent:"center",alignItems:"center"}}>
 
-        {btn && <button onClick={enter} className='enterbtn' >Enter journey</button>}
-        {!btn &&  <div className='slider'>
+        {currentPhase==='enterScreen' && <button onClick={enter} className='enterbtn' >Enter journey</button>}
+        {currentPhase==='pickScreen' &&  <div className='slider'>
             <button onClick={()=>{gsap.to(camera.current.position,{x:35})}} className='sliderbtn'> scene 1</button>
             <button onClick={()=>{gsap.to(camera.current.position,{x:0})}} className='sliderbtn'> scene 2</button>
             <button onClick={()=>{gsap.to(camera.current.position,{x:-35})}} className='sliderbtn'> scene 3</button>
@@ -64,6 +78,18 @@ export default function Portal1(){
                 
             </div>
        </div>}
+
+       { <div className='lyricscreen'>
+        <div className='top'>
+            <h2>Spotify Playlist</h2>
+            <button onClick={closeplaylist} style={{height:'3vh',width:"5vw"}}>Go back</button>
+        </div>
+        <div className='mid'>
+            <p2 style={{}}>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Sapiente libero, velit voluptates laboriosam ratione nemo explicabo eius quia modi accusantium eos exercitationem est eligendi. Nobis repellat eveniet ad beatae quas?</p2>
+        </div>
+       </div>
+
+       }
             <Canvas style={{background:'linear-gradient(90deg, rgba(245,182,168,1) 0%, rgba(241,121,96,1) 52%, rgba(249,213,206,1) 100%)'}}   >
                 <PerspectiveCamera   ref={camera} position={[0,-7,-45]} rotation={[0,0,0]}>
                     <CameraControls  />
@@ -71,7 +97,7 @@ export default function Portal1(){
                     <Bar position={[35,0,0]} rotation={[0,0*(Math.PI/180),0]} scale={[0.20,0.20,0.20]}/>
                     <Bar position={[-35,0,0]} rotation={[0,0*(Math.PI/180),0]} scale={[0.20,0.20,0.20]}/>
                     <Image onClick={openbottle} scale={[3,3,3]} position={[-35,8,10]}  url='/circle.png' ></Image>
-                    <Image scale={[3,3,3]} position={[-40,6,10]}  url='/circle.png' ></Image>
+                    <Image onClick={openplaylist} scale={[3,3,3]} position={[-40,6,10]}  url='/circle.png' ></Image>
                     <Image scale={[3,3,3]} position={[-32,4,10]}  url='/circle.png' ></Image>
 
                     <Html position={[0,10,0]}><h1>Hello</h1></Html>
