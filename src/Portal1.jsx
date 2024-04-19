@@ -1,16 +1,23 @@
 import './App.css'
 import { Canvas } from '@react-three/fiber'
 import { PerspectiveCamera,CameraControls, Environment, Html, Image, Circle, Box } from '@react-three/drei'
-import { useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { Bar } from './Bar'
 import gsap from 'gsap'
 import { Link } from 'react-router-dom'
 export default function Portal1(){
+    const [isPlaying,setisPlaying] =useState(true)
+    const audio=useRef()
+    useEffect(()=>{
+        audio.current.play()
+
+    },[])
+    //audio.play()
     const camera=useRef()
     const [btn,setbtn]=useState(true)
     const [bottlescreen,setbottlescreen] = useState(false)
     const [currentPhase,setCurrentPhase] = useState('enterScreen')
-    
+    const [audiobtntext,setaudiobtntext] = useState('Mute')
     const enter=()=>{
         gsap.to(camera.current.position,{z:-20})
         gsap.to(camera.current.position,{y:-5})
@@ -30,7 +37,7 @@ export default function Portal1(){
 
     }
     const openplaylist=()=>{
-            gsap.to('.lyricscreen',{height:'35dvh'})
+            gsap.to('.lyricscreen',{height:'40dvh'})
             gsap.to('.lyricscreen',{width:'30dvw'})
             console.log('clicked')
             setCurrentPhase('lyricsScreen')
@@ -65,10 +72,20 @@ export default function Portal1(){
         gsap.to(camera.current.position,{x:-40})
         gsap.to('.blackline',{width:"100%"})
     }
-    
+    const handleAudio = () => {
+        if (isPlaying){
+            audio.current.pause()
+            setisPlaying(false)
+        }
+        if (!isPlaying){
+            audio.current.play()
+            setisPlaying(true)
+
+        }
+    }
     return(
         <div style={{height:'100dvh',width:'100dvw',display:'flex',justifyContent:"center",alignItems:"center"}}>
-        
+        <audio src='bgmusic.mp3' ref={audio}></audio>
         {currentPhase==='enterScreen' && <button onClick={enter} className='enterbtn' >Enter journey</button>}
         {currentPhase==='pickScreen' &&  <div className='slider'>
             <div className='whiteline'></div>
@@ -78,7 +95,7 @@ export default function Portal1(){
             <button onClick={screen3} className='sliderbtn'> </button>
             </div>}
         {  <div className='bottlescreen'>
-            <button onClick={closebottle} style={{top:"15%",position:"absolute",height:"5dvh",width:"10dvw"}}>Go back</button>
+            <button onClick={closebottle} style={{top:"10%",position:"absolute",height:"4dvh",width:"2dvw",right:'10%',border:'0px',backgroundColor:"black",color:"white",borderRadius:"50%",cursor:"pointer"}}>X</button>
             <h1 style={{fontSize:'4vh'}}>BRUTAL FRUIT SPRITZER RUBY APPLE</h1>
             <p1 style={{fontSize:'3vh'}}>Ruby Apple is an exquisite infusion citrus and apple flavouring with a hint of grapefruit. The balance of sweet and zesty is complemented by delicate notes of fruit, spice and honey providing a gorgeous depth of citrus.</p1>
             <div className='stats'>
@@ -93,10 +110,10 @@ export default function Portal1(){
        {<div className='lyricscreen'>
         <div className='top'>
             <h2>Spotify Playlist</h2>
-            <button onClick={closeplaylist} style={{height:'3vh',width:"5vw"}}>Go back</button>
+            <button onClick={closeplaylist} style={{height:'3vh',width:"1.5vw",border:'1px solid gray',borderRadius:"50%",right:"10%",position:'absolute',cursor:"pointer"}}>X</button>
         </div>
         <div className='mid'>
-            <p2 style={{}}>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Sapiente libero, velit voluptates laboriosam ratione nemo explicabo eius quia modi accusantium eos exercitationem est eligendi. Nobis repellat eveniet ad beatae quas?</p2>
+            <p2 style={{marginLeft:"1dvw",marginRight:"1dvw",fontSize:"2dvh"}}>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Sapiente libero, velit voluptates laboriosam ratione nemo explicabo eius quia modi accusantium eos exercitationem est eligendi. Nobis repellat eveniet ad beatae quas?</p2>
         </div>
         </div>}
 
@@ -104,12 +121,10 @@ export default function Portal1(){
             <iframe width="100%" height="100%" src="https://www.youtube.com/embed/MJt_Z11Ug8E?si=wopCpaXnbXOeo409&amp;controls=0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
         </div>}
 
-        {currentPhase==='videoScreen' && <button onClick={closevideo} className='vidbtn'>Go back</button>}
+        {currentPhase==='videoScreen' && <button onClick={closevideo} className='vidbtn'>X</button>}
         {<button className='returnbtn'><Link style={{textDecoration:"none",color:"white"}} to={'/'}>Return to Home</Link></button>}
-
-
-
-
+        
+        {<button onClick={handleAudio} className='audiobtn'>{isPlaying?"Mute":"Play"}</button>}
             <Canvas style={{background:'linear-gradient(90deg, rgba(245,182,168,1) 0%, rgba(241,121,96,1) 52%, rgba(249,213,206,1) 100%)'}}   >
                 <PerspectiveCamera   ref={camera} position={[0,-7,-45]} rotation={[0,0,0]}>
                     <CameraControls  />
@@ -125,11 +140,11 @@ export default function Portal1(){
                     <TouchPoint clicked={openplaylist} position={[-46,4,11]}/>
 
                     <TouchPoint clicked={openbottle} position={[-0,8,11]}/>
-                    <TouchPoint clicked={openvideo} position={[4,5,10]}/>
+                    <TouchPoint clicked={openvideo} position={[4,5,11]}/>
                     <TouchPoint clicked={openplaylist} position={[-4,4,11]}/>
 
                     <TouchPoint clicked={openbottle} position={[40,8,11]}/>
-                    <TouchPoint clicked={openvideo} position={[44,5,10]}/>
+                    <TouchPoint clicked={openvideo} position={[44,5,11]}/>
                     <TouchPoint clicked={openplaylist} position={[36,4,11]}/>
 
 
