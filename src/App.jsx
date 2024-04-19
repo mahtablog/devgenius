@@ -197,7 +197,7 @@ const changeScene=(setScene)=>{
 
         
      <div style={{height:'100dvh',width:'100dvw',display:'flex',justifyContent:"center",alignItems:"center"}}>
-      <Canvas style={{background:'linear-gradient(90deg, rgba(245,182,168,1) 0%, rgba(241,121,96,1) 52%, rgba(249,213,206,1) 100%)'}}   >
+      <Canvas style={{backgroundImage:'url("bg.jpeg")',backgroundRepeat:"no-repeat",backgroundSize:"cover"}}   >
         <PerspectiveCamera   ref={camera} position={[60,15,-73]} rotation={[0,0,0]}>
           <CameraControls  />
             
