@@ -8,6 +8,7 @@ import { Link } from 'react-router-dom'
 export default function Portal1(){
     const [isPlaying,setisPlaying] =useState(true)
     const audio=useRef()
+    const [curentscreen,setcurrentscreen] = useState('1')
     useEffect(()=>{
         audio.current.play()
 
@@ -27,12 +28,17 @@ export default function Portal1(){
     const openbottle=()=>{
         
         gsap.to(".bottlescreen",{width:"75dvw"})
+        gsap.to(".bottle",{width:"15dvw"})
+        gsap.to(".bottle",{height:"70dvh"})
+
         setCurrentPhase('bottleScreen')
     }
     const closebottle=()=>{
         console.log('clickeds')
         //setbottlescreen(false)
         gsap.to(".bottlescreen",{width:"0dvw"})
+        gsap.to(".bottle",{width:"0dvw"})
+        gsap.to(".bottle",{height:"0dvh"})
         setCurrentPhase('pickScreen')
 
     }
@@ -63,14 +69,25 @@ export default function Portal1(){
     const screen1=()=>{
         gsap.to(camera.current.position,{x:40})
         gsap.to('.blackline',{width:"0%"})
+        gsap.to('.sliderimg',{left:"0%"})
+        setcurrentscreen('1')
+
     }
     const screen2=()=>{
         gsap.to(camera.current.position,{x:0})
         gsap.to('.blackline',{width:"50%"})
+        gsap.to('.sliderimg',{left:"45%"})
+        setcurrentscreen('2')
+
+
     }
     const screen3=()=>{
         gsap.to(camera.current.position,{x:-40})
         gsap.to('.blackline',{width:"100%"})
+        gsap.to('.sliderimg',{left:"94%"})
+        setcurrentscreen('3')
+
+
     }
     const handleAudio = () => {
         if (isPlaying){
@@ -88,11 +105,13 @@ export default function Portal1(){
         <audio src='bgmusic.mp3' ref={audio}></audio>
         {currentPhase==='enterScreen' && <button onClick={enter} className='enterbtn' >Enter journey</button>}
         {currentPhase==='pickScreen' &&  <div className='slider'>
+            
             <div className='whiteline'></div>
             <div className='blackline'></div>
-            <button onClick={screen1} className='sliderbtn'> </button>
-            <button onClick={screen2} className='sliderbtn'> </button>
-            <button onClick={screen3} className='sliderbtn'> </button>
+            <img src='slider.png' className='sliderimg'></img>
+            {curentscreen!=='1' && <button onClick={screen1} className='sliderbtn1'> </button>}
+            {curentscreen!=='2' && <button onClick={screen2} className='sliderbtn2'> </button>}
+            {curentscreen!=='3' &&<button onClick={screen3} className='sliderbtn3'> </button>}
             </div>}
         {  <div className='bottlescreen'>
             <button onClick={closebottle} style={{top:"10%",position:"absolute",height:"4dvh",width:"2dvw",right:'10%',border:'0px',backgroundColor:"black",color:"white",borderRadius:"50%",cursor:"pointer"}}>X</button>
@@ -124,7 +143,9 @@ export default function Portal1(){
         {currentPhase==='videoScreen' && <button onClick={closevideo} className='vidbtn'>X</button>}
         {<button className='returnbtn'><Link style={{textDecoration:"none",color:"white"}} to={'/'}>Return to Home</Link></button>}
         
-        {<button onClick={handleAudio} className='audiobtn'>{isPlaying?"Mute":"Play"}</button>}
+        {<img src='sound-bars.png' onClick={handleAudio} className='audiobtn'></img>}
+
+        {<img src='bottle.png' className='bottle'></img>}
             <Canvas style={{backgroundImage:'url("bg.jpeg")',backgroundRepeat:"no-repeat",backgroundSize:"cover"}}   >
                 <PerspectiveCamera   ref={camera} position={[0,-7,-45]} rotation={[0,0,0]}>
                     <CameraControls  />

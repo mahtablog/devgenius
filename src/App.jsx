@@ -1,13 +1,13 @@
 import './App.css'
 import { Canvas, useFrame,useThree } from '@react-three/fiber'
 import { Shape, ShapeGeometry } from 'three';
-import {Box,Sparkles, CameraControls, Environment, PerspectiveCamera, Sky,MeshPortalMaterial,Text, RoundedBox, Html} from '@react-three/drei'
+import {Box,Sparkles, CameraControls, Environment, PerspectiveCamera, Sky,MeshPortalMaterial,Text, RoundedBox, Html, useTexture, Image} from '@react-three/drei'
 import { Children, useEffect, useRef, useState } from 'react'
 import gsap from "gsap";
 import * as THREE from 'three'
 import _ from 'lodash';
 import { Link, Route, Routes } from 'react-router-dom';
-function App() {
+ function App() {
 
   const camera=useRef()
   const portal1=useRef()
@@ -33,7 +33,6 @@ function App() {
       const pos5=[-72,-18.5,84,135]
       const pos6=[-73,-18.5,66,30]
 
-  
   const right=()=>{
     
       if (current===1){
@@ -202,55 +201,53 @@ const changeScene=(setScene)=>{
           <CameraControls  />
             
          
-          <RoundedRectangle clicked={clicked} current={current} scale={[1,1,1]} position={pos1} rotation={pos1[3]} reference={portal1} portalNum={1} color={'hotpink'}>
-            <MeshPortalMaterial   attach='material' resolution={2} side={THREE.DoubleSide} blend={scene1}>
-              <color attach="background" args={['hotpink']} />
+          <RoundedRectangle clicked={clicked} current={current} scale={[1,1,1]} position={pos1} rotation={pos1[3]} reference={portal1} portalNum={1} >
+            <MeshPortalMaterial attach='material' resolution={2} side={THREE.DoubleSide} blend={scene2}>
               <Text position={[2.5,6.5,1]} fontSize={0.8} an >Portal {1}</Text>
-              
+              <Image scale={[5,10,5]} position={[2.5,5,0]} url='portal2.jpeg'></Image>
               <Environment preset='city'/>
             </MeshPortalMaterial>
           </RoundedRectangle>
 
           <RoundedRectangle clicked={clicked} current={current} scale={[1,1,1]} position={pos2} rotation={pos2[3]} reference={portal2} portalNum={2} color={'dodgerblue'}>
           <MeshPortalMaterial attach='material' resolution={2} side={THREE.DoubleSide} blend={scene2}>
-              <color attach="background" args={['skyblue']} />
               <Text position={[2.5,6.5,1]} fontSize={0.8} an >Portal {2}</Text>
-              
+              <Image scale={[5,10,5]} position={[2.5,5,0]} url='portal1pic.jpeg'></Image>
               <Environment preset='city'/>
             </MeshPortalMaterial>
           </RoundedRectangle>
           
           <RoundedRectangle clicked={clicked} current={current} scale={[1,1,1]} position={pos3} rotation={pos3[3]} reference={portal3} portalNum={3} color={'red'}>
           <MeshPortalMaterial attach='material' resolution={2} side={THREE.DoubleSide} blend={scene3}>
-              <color attach="background" args={['dodgerblue']} />
               <Text position={[2.5,6.5,1]} fontSize={0.8} an >Portal {3}</Text>
-              
+              <Image scale={[5,10,5]} position={[2.5,5,0]} url='portal2.jpeg'></Image>
+
               <Environment preset='city'/>
             </MeshPortalMaterial>
           </RoundedRectangle>
           
           <RoundedRectangle clicked={clicked} current={current} scale={[1,1,1]} position={pos4} rotation={pos4[3]} reference={portal4} portalNum={4} color={'skyblue'}>
           <MeshPortalMaterial attach='material' resolution={2} side={THREE.DoubleSide} blend={scene4}>
-              <color attach="background" args={['yellow']} />
               <Text position={[2.5,6.5,1]} fontSize={0.8} an >Portal {4}</Text>
-              
+              <Image scale={[5,10,5]} position={[2.5,5,0]} url='portal2.jpeg'></Image>
+
               <Environment preset='city'/>
             </MeshPortalMaterial>
           </RoundedRectangle>
           
           <RoundedRectangle clicked={clicked} current={current} scale={[1,1,1]} position={pos5} rotation={pos5[3]} reference={portal5} portalNum={5} color={'teal'}>
           <MeshPortalMaterial attach='material' resolution={2} side={THREE.DoubleSide} blend={scene5}>
-              <color attach="background" args={['orange']} />
               <Text position={[2.5,6.5,1]} fontSize={0.8} an >Portal {5}</Text>
-              
+              <Image scale={[5,10,5]} position={[2.5,5,0]} url='portal2.jpeg'></Image>
+
               <Environment preset='city'/>
             </MeshPortalMaterial>
           </RoundedRectangle>
           <RoundedRectangle clicked={clicked} current={current} scale={[1,1,1]} position={pos6} rotation={pos6[3]} reference={portal6} portalNum={6} color={'yellow'}>
           <MeshPortalMaterial attach='material' resolution={2} side={THREE.DoubleSide} blend={scene6}>
-              <color attach="background" args={['black']} />
               <Text position={[2.5,6.5,1]} fontSize={0.8} an >Portal {6}</Text>
-              
+              <Image scale={[6,10,5]} position={[2.5,5,0]} url='portal6pic.jpeg'></Image>
+
               <Environment preset='city'/>
             </MeshPortalMaterial>
           </RoundedRectangle>
@@ -265,7 +262,6 @@ const changeScene=(setScene)=>{
     </>
   )
 }
-
 function RoundedRectangle({scale,position,rotation,color,reference,portalNum,children,clicked}) {
   let x = 0;
   let y = 0;
@@ -285,6 +281,7 @@ function RoundedRectangle({scale,position,rotation,color,reference,portalNum,chi
   let geometry = new ShapeGeometry(shape);
   
   
+
   return <mesh onClick={clicked}  ref={reference}  geometry={geometry} scale={scale} position={position} rotation={[0,rotation*(Math.PI/180),0]} >
       {children}
       </mesh>;

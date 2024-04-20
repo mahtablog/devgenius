@@ -171,21 +171,29 @@
 }
 .whiteline{
   width: 100%;
-  height: 10%;
+  height: 5%;
   background-color: white;
   position: absolute;
 }
 .slider{
+  background-color: #6d5e5b;
   position: absolute;
   z-index: 122;
   top: 80dvh;
   height: 10dvh;
   width: 30dvw;
   display: flex;
-  justify-content: space-between;
   align-items: center;
 }
-.sliderbtn{
+.sliderbtn3{
+  left: 94%;
+  position: absolute;
+}
+.sliderbtn2{
+  left: 45%;
+  position: absolute;
+}
+.sliderbtn1,.sliderbtn2,.sliderbtn3{
   font-size: 20px;
   width: 2dvw;
   height: 4dvh;
@@ -194,16 +202,25 @@
   z-index: 2;
   cursor: pointer;
   transition: 0.2s;
+  background-color: transparent;
+  border: 5px solid white;
 }
-
+.sliderimg{
+  position: absolute;
+  height: 3dvw;
+  width: 4dvh;
+}
+.lines{
+  position: absolute;
+  z-index: 2;
+}
 .sliderbtn:hover{
   transform: scale(1.2);
   transition: 0.2s;
 
 }
 .blackline{
- 
-  height: 10%;
+  height: 5%;
   background-color: black;
   position: absolute;
 }
@@ -329,9 +346,22 @@
   position: absolute;
   z-index: 1;
   height: 5dvh;
-  width: 5dvw;
+  width: 3dvw;
   top: 90%;
   left: 5%;
-  font-size: 2.5dvh;
+  border: 3px solid white;
+  padding: 10px 10px 10px 10px;
   cursor: pointer;
+  transition: 0.2s;
+}
+.audiobtn:hover{
+  transform: scale(1.2);
+  transition: 0.2s;
+}
+.bottle{
+  position: absolute;
+  z-index: 1;
+  left: 5%;
+  height: 0dvh;
+  width: 0dvw;
 }
