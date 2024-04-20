@@ -196,7 +196,7 @@ const changeScene=(setScene)=>{
 
         
      <div style={{height:'100dvh',width:'100dvw',display:'flex',justifyContent:"center",alignItems:"center"}}>
-      <Canvas style={{backgroundImage:'url("bg.jpeg")',backgroundRepeat:"no-repeat",backgroundSize:"cover"}}   >
+      <Canvas style={{backgroundColor:"pink"}}   >
         <PerspectiveCamera   ref={camera} position={[60,15,-73]} rotation={[0,0,0]}>
           <CameraControls  />
             

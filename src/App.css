@@ -176,7 +176,6 @@
   position: absolute;
 }
 .slider{
-  background-color: #6d5e5b;
   position: absolute;
   z-index: 122;
   top: 80dvh;
@@ -186,7 +185,7 @@
   align-items: center;
 }
 .sliderbtn3{
-  left: 94%;
+  left: 93%;
   position: absolute;
 }
 .sliderbtn2{

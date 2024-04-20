@@ -145,7 +145,10 @@ export default function Portal1(){
         
         {<img src='sound-bars.png' onClick={handleAudio} className='audiobtn'></img>}
 
-        {<img src='bottle.png' className='bottle'></img>}
+        {curentscreen==='1'&&<img src='bottle.png' className='bottle'></img>}
+        {curentscreen==='2'&&<img src='bottle2.jpeg' className='bottle'></img>}
+        {curentscreen==='3'&&<img src='bottle3.jpeg' className='bottle'></img>}
+        
             <Canvas style={{backgroundImage:'url("bg.jpeg")',backgroundRepeat:"no-repeat",backgroundSize:"cover"}}   >
                 <PerspectiveCamera   ref={camera} position={[0,-7,-45]} rotation={[0,0,0]}>
                     <CameraControls  />
