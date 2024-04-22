@@ -82,14 +82,16 @@ export default function Portal1(){
 
     const screen1=()=>{
         gsap.to(camera.current.position,{x:40})
-        gsap.to('.blackline',{width:"0%"})
+        gsap.to('.blackline1',{width:"0%"})
+        gsap.to('.blackline2',{width:"0%"})
         gsap.to('.sliderimg',{left:"0%"})
         setcurrentscreen('1')
 
     }
     const screen2=()=>{
         gsap.to(camera.current.position,{x:0})
-        gsap.to('.blackline',{width:"50%"})
+        gsap.to('.blackline1',{width:"37%"})
+        gsap.to('.blackline2',{width:"0%"})
         gsap.to('.sliderimg',{left:"45%"})
         setcurrentscreen('2')
 
@@ -97,7 +99,8 @@ export default function Portal1(){
     }
     const screen3=()=>{
         gsap.to(camera.current.position,{x:-40})
-        gsap.to('.blackline',{width:"100%"})
+        gsap.to('.blackline1',{width:"37%"})
+        gsap.to('.blackline2',{width:"40%"})
         gsap.to('.sliderimg',{left:"94%"})
         setcurrentscreen('3')
 
@@ -120,8 +123,10 @@ export default function Portal1(){
         {currentPhase==='enterScreen' && <button onClick={enter} className='enterbtn' >Enter journey</button>}
         {entered &&  <div className='slider'>
             
-            <div className='whiteline'></div>
-            <div className='blackline'></div>
+            <div className='whiteline1'></div>
+            <div className='blackline1'></div>
+            <div className='whiteline2'></div>
+            <div className='blackline2'></div>
             <img src='slider.png' className='sliderimg'></img>
             {curentscreen!=='1' && <button onClick={screen1} className='sliderbtn1'> </button>}
             {curentscreen!=='2' && <button onClick={screen2} className='sliderbtn2'> </button>}

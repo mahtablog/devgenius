@@ -17,6 +17,7 @@
   transform: rotate(0deg);
   height: 10dvh;
   width: 5dvw;
+  cursor: pointer;
 }
 .btn2{
   position: absolute;
@@ -30,7 +31,8 @@
   left: 40%;
   top: 84%;
   transform: translate(-50%, -50%);
-  transform: rotate(180deg)
+  transform: rotate(180deg);
+  cursor: pointer;
 }
 
 .btn:hover{
@@ -169,10 +171,32 @@
   transform: scale(1.1);
   transition: 0.2s;
 }
-.whiteline{
-  width: 100%;
+.whiteline1{
+  width: 37%;
   height: 5%;
+  left: 8%;
   background-color: white;
+  position: absolute;
+}
+.whiteline2{
+  width: 40%;
+  height: 5%;
+  left: 52%;
+  background-color: white;
+  position: absolute;
+}
+.blackline1{
+  width: 0%;
+  height: 5%;
+  left: 8%;
+  background-color: black;
+  position: absolute;
+}
+.blackline2{
+  width: 0%;
+  height: 5%;
+  left: 52%;
+  background-color: black;
   position: absolute;
 }
 .slider{
