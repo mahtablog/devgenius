@@ -178,17 +178,17 @@ export default function Portal1(){
                     <Image scale={[15,13,13]} position={[0,5,10]} url='/world 2.png'></Image>
                     <Image scale={[15,13,13]} position={[40,5,10]} url='/world 3.png'></Image>
                     
-                    {entered &&<TouchPoint clicked={openbottle} position={[-40,8,11]}/>}
-                    {entered &&<TouchPoint clicked={openvideo} position={[-36,2,11]}/>}
-                    {entered &&<TouchPoint clicked={openplaylist} position={[-46,4,11]}/>}
+                    {entered && currentPhase==='pickScreen' && <TouchPoint clicked={openbottle} position={[-40,8,11]}/>}
+                    {entered &&currentPhase==='pickScreen' && <TouchPoint clicked={openvideo} position={[-36,2,11]}/>}
+                    {entered &&currentPhase==='pickScreen' && <TouchPoint clicked={openplaylist} position={[-46,4,11]}/>}
 
-                    {entered &&<TouchPoint clicked={openbottle} position={[-0,8,11]}/>}
-                    {entered &&<TouchPoint clicked={openvideo} position={[4,5,11]}/>}
-                    {entered &&<TouchPoint clicked={openplaylist} position={[-4,4,11]}/>}
+                    {entered &&currentPhase==='pickScreen' && <TouchPoint clicked={openbottle} position={[-0,8,11]}/>}
+                    {entered &&currentPhase==='pickScreen' && <TouchPoint clicked={openvideo} position={[4,5,11]}/>}
+                    {entered &&currentPhase==='pickScreen' && <TouchPoint clicked={openplaylist} position={[-4,4,11]}/>}
 
-                    {entered &&<TouchPoint clicked={openbottle} position={[40,8,11]}/>}
-                    {entered &&<TouchPoint clicked={openvideo} position={[44,5,11]}/>}
-                    {entered &&<TouchPoint clicked={openplaylist} position={[36,4,11]}/>}
+                    {entered &&currentPhase==='pickScreen' && <TouchPoint clicked={openbottle} position={[40,8,11]}/>}
+                    {entered &&currentPhase==='pickScreen' && <TouchPoint clicked={openvideo} position={[44,5,11]}/>}
+                    {entered &&currentPhase==='pickScreen' && <TouchPoint clicked={openplaylist} position={[36,4,11]}/>}
 
 
                 </PerspectiveCamera>
