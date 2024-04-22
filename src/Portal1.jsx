@@ -178,17 +178,17 @@ export default function Portal1(){
                     <Image scale={[15,13,13]} position={[0,5,10]} url='/world 2.png'></Image>
                     <Image scale={[15,13,13]} position={[40,5,10]} url='/world 3.png'></Image>
                     
-                    <TouchPoint clicked={openbottle} position={[-40,8,11]}/>
-                    <TouchPoint clicked={openvideo} position={[-36,2,11]}/>
-                    <TouchPoint clicked={openplaylist} position={[-46,4,11]}/>
+                    {entered &&<TouchPoint clicked={openbottle} position={[-40,8,11]}/>}
+                    {entered &&<TouchPoint clicked={openvideo} position={[-36,2,11]}/>}
+                    {entered &&<TouchPoint clicked={openplaylist} position={[-46,4,11]}/>}
 
-                    <TouchPoint clicked={openbottle} position={[-0,8,11]}/>
-                    <TouchPoint clicked={openvideo} position={[4,5,11]}/>
-                    <TouchPoint clicked={openplaylist} position={[-4,4,11]}/>
+                    {entered &&<TouchPoint clicked={openbottle} position={[-0,8,11]}/>}
+                    {entered &&<TouchPoint clicked={openvideo} position={[4,5,11]}/>}
+                    {entered &&<TouchPoint clicked={openplaylist} position={[-4,4,11]}/>}
 
-                    <TouchPoint clicked={openbottle} position={[40,8,11]}/>
-                    <TouchPoint clicked={openvideo} position={[44,5,11]}/>
-                    <TouchPoint clicked={openplaylist} position={[36,4,11]}/>
+                    {entered &&<TouchPoint clicked={openbottle} position={[40,8,11]}/>}
+                    {entered &&<TouchPoint clicked={openvideo} position={[44,5,11]}/>}
+                    {entered &&<TouchPoint clicked={openplaylist} position={[36,4,11]}/>}
 
 
                 </PerspectiveCamera>
@@ -203,9 +203,9 @@ const TouchPoint=({position,clicked})=>{
     <group onClick={clicked}>
         <mesh visible position={position} rotation={[0, 0, 0]} castShadow scale={[0.3,0.3,0.3]}>
             <ringGeometry   args={[3.8, 4, 28]} />
-            <meshBasicMaterial attach="material" color="black" />
+            <meshBasicMaterial attach="material" color="white" />
         </mesh>
-        <Circle material-color={'black'} scale={[0.2,0.2,0.2]} position={position}></Circle>
+        <Circle material-color={'white'} scale={[0.2,0.2,0.2]} position={position}></Circle>
         <Circle visible={false} scale={[1.2,1.2,1.2]} material-color={'black'} position={position}></Circle>
     </group>
     )
