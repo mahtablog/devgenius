@@ -10,7 +10,7 @@ export default function Portal1(){
     const audio=useRef()
     const [curentscreen,setcurrentscreen] = useState('1')
     useEffect(()=>{
-        audio.current.play()
+        //audio.current.play()
 
     },[])
     //audio.play()
@@ -19,18 +19,21 @@ export default function Portal1(){
     const [bottlescreen,setbottlescreen] = useState(false)
     const [currentPhase,setCurrentPhase] = useState('enterScreen')
     const [audiobtntext,setaudiobtntext] = useState('Mute')
+    const [entered,setentered]=useState(false)
     const enter=()=>{
         gsap.to(camera.current.position,{z:-20})
         gsap.to(camera.current.position,{y:-5})
         gsap.to(camera.current.position,{x:40})
         setCurrentPhase("pickScreen")
+        setentered(true)
     }
     const openbottle=()=>{
         
         gsap.to(".bottlescreen",{width:"75dvw"})
         gsap.to(".bottle",{width:"15dvw"})
         gsap.to(".bottle",{height:"70dvh"})
-
+        gsap.to('.slider',{height:'0dvh'})
+        gsap.to('.slider',{width:'0dvw'})
         setCurrentPhase('bottleScreen')
     }
     const closebottle=()=>{
@@ -39,30 +42,41 @@ export default function Portal1(){
         gsap.to(".bottlescreen",{width:"0dvw"})
         gsap.to(".bottle",{width:"0dvw"})
         gsap.to(".bottle",{height:"0dvh"})
+        gsap.to('.slider',{height:'10dvh'})
+        gsap.to('.slider',{width:'30dvw'})
+
+
         setCurrentPhase('pickScreen')
 
     }
     const openplaylist=()=>{
             gsap.to('.lyricscreen',{height:'40dvh'})
             gsap.to('.lyricscreen',{width:'30dvw'})
-            console.log('clicked')
+            gsap.to('.slider',{height:'0dvh'})
+        gsap.to('.slider',{width:'0dvw'})
             setCurrentPhase('lyricsScreen')
     }
     const closeplaylist=()=>{
             gsap.to('.lyricscreen',{height:'0dvh'})
             gsap.to('.lyricscreen',{width:'0dvw'})
-            console.log('closed')
+            
+            gsap.to('.slider',{height:'10dvh'})
+        gsap.to('.slider',{width:'30dvw'})
             setCurrentPhase('pickScreen')
     }
     const openvideo=()=>{
         gsap.to('.videoscreen',{height:'75dvh'})
         gsap.to('.videoscreen',{width:'90dvw'})
+        gsap.to('.slider',{height:'0dvh'})
+        gsap.to('.slider',{width:'0dvw'})
         setCurrentPhase('videoScreen')
 
     }
     const closevideo=()=>{
         gsap.to('.videoscreen',{height:'0dvh'})
         gsap.to('.videoscreen',{width:'0dvw'})
+        gsap.to('.slider',{height:'10dvh'})
+        gsap.to('.slider',{width:'30dvw'})
         setCurrentPhase('pickScreen')
     }
 
@@ -104,7 +118,7 @@ export default function Portal1(){
         <div style={{height:'100dvh',width:'100dvw',display:'flex',justifyContent:"center",alignItems:"center"}}>
         <audio src='bgmusic.mp3' ref={audio}></audio>
         {currentPhase==='enterScreen' && <button onClick={enter} className='enterbtn' >Enter journey</button>}
-        {currentPhase==='pickScreen' &&  <div className='slider'>
+        {entered &&  <div className='slider'>
             
             <div className='whiteline'></div>
             <div className='blackline'></div>
@@ -146,8 +160,8 @@ export default function Portal1(){
         {<img src='sound-bars.png' onClick={handleAudio} className='audiobtn'></img>}
 
         {curentscreen==='1'&&<img src='bottle.png' className='bottle'></img>}
-        {curentscreen==='2'&&<img src='bottle2.jpeg' className='bottle'></img>}
-        {curentscreen==='3'&&<img src='bottle3.jpeg' className='bottle'></img>}
+        {curentscreen==='2'&&<img src='bottle3.jpeg' className='bottle'></img>}
+        {curentscreen==='3'&&<img src='bottle2.jpeg' className='bottle'></img>}
         
             <Canvas style={{backgroundImage:'url("bg.jpeg")',backgroundRepeat:"no-repeat",backgroundSize:"cover"}}   >
                 <PerspectiveCamera   ref={camera} position={[0,-7,-45]} rotation={[0,0,0]}>
