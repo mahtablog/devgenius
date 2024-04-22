@@ -201,11 +201,15 @@ export default function Portal1(){
 const TouchPoint=({position,clicked})=>{
     return (
     <group onClick={clicked}>
+        <mesh visible position={position} rotation={[0, 0, 0]} castShadow scale={[0.2,0.2,0.2]}>
+            <ringGeometry   args={[3.8, 4, 28]} />
+            <meshBasicMaterial attach="material" color="white" />
+        </mesh>
         <mesh visible position={position} rotation={[0, 0, 0]} castShadow scale={[0.3,0.3,0.3]}>
             <ringGeometry   args={[3.8, 4, 28]} />
             <meshBasicMaterial attach="material" color="white" />
         </mesh>
-        <Circle material-color={'white'} scale={[0.2,0.2,0.2]} position={position}></Circle>
+        <Circle material-color={'white'} scale={[0.1,0.1,0.1]} position={position}></Circle>
         <Circle visible={false} scale={[1.2,1.2,1.2]} material-color={'black'} position={position}></Circle>
     </group>
     )
