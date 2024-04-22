@@ -196,14 +196,13 @@ const changeScene=(setScene)=>{
 
         
      <div style={{height:'100dvh',width:'100dvw',display:'flex',justifyContent:"center",alignItems:"center"}}>
-      <Canvas style={{backgroundColor:"pink"}}   >
+      <Canvas style={{backgroundColor:"#E5BAB5"}}   >
         <PerspectiveCamera   ref={camera} position={[60,15,-73]} rotation={[0,0,0]}>
           <CameraControls  />
             
          
           <RoundedRectangle clicked={clicked} current={current} scale={[1,1,1]} position={pos1} rotation={pos1[3]} reference={portal1} portalNum={1} >
             <MeshPortalMaterial attach='material' resolution={2} side={THREE.DoubleSide} blend={scene2}>
-              <Text position={[2.5,6.5,1]} fontSize={0.8} an >Portal {1}</Text>
               <Image scale={[5,10,5]} position={[2.5,5,0]} url='portal2.jpeg'></Image>
               <Environment preset='city'/>
             </MeshPortalMaterial>
@@ -211,7 +210,6 @@ const changeScene=(setScene)=>{
 
           <RoundedRectangle clicked={clicked} current={current} scale={[1,1,1]} position={pos2} rotation={pos2[3]} reference={portal2} portalNum={2} color={'dodgerblue'}>
           <MeshPortalMaterial attach='material' resolution={2} side={THREE.DoubleSide} blend={scene2}>
-              <Text position={[2.5,6.5,1]} fontSize={0.8} an >Portal {2}</Text>
               <Image scale={[5,10,5]} position={[2.5,5,0]} url='portal1pic.jpeg'></Image>
               <Environment preset='city'/>
             </MeshPortalMaterial>
@@ -219,7 +217,6 @@ const changeScene=(setScene)=>{
           
           <RoundedRectangle clicked={clicked} current={current} scale={[1,1,1]} position={pos3} rotation={pos3[3]} reference={portal3} portalNum={3} color={'red'}>
           <MeshPortalMaterial attach='material' resolution={2} side={THREE.DoubleSide} blend={scene3}>
-              <Text position={[2.5,6.5,1]} fontSize={0.8} an >Portal {3}</Text>
               <Image scale={[5,10,5]} position={[2.5,5,0]} url='portal2.jpeg'></Image>
 
               <Environment preset='city'/>
@@ -228,7 +225,6 @@ const changeScene=(setScene)=>{
           
           <RoundedRectangle clicked={clicked} current={current} scale={[1,1,1]} position={pos4} rotation={pos4[3]} reference={portal4} portalNum={4} color={'skyblue'}>
           <MeshPortalMaterial attach='material' resolution={2} side={THREE.DoubleSide} blend={scene4}>
-              <Text position={[2.5,6.5,1]} fontSize={0.8} an >Portal {4}</Text>
               <Image scale={[5,10,5]} position={[2.5,5,0]} url='portal2.jpeg'></Image>
 
               <Environment preset='city'/>
@@ -237,7 +233,6 @@ const changeScene=(setScene)=>{
           
           <RoundedRectangle clicked={clicked} current={current} scale={[1,1,1]} position={pos5} rotation={pos5[3]} reference={portal5} portalNum={5} color={'teal'}>
           <MeshPortalMaterial attach='material' resolution={2} side={THREE.DoubleSide} blend={scene5}>
-              <Text position={[2.5,6.5,1]} fontSize={0.8} an >Portal {5}</Text>
               <Image scale={[5,10,5]} position={[2.5,5,0]} url='portal2.jpeg'></Image>
 
               <Environment preset='city'/>
@@ -245,7 +240,6 @@ const changeScene=(setScene)=>{
           </RoundedRectangle>
           <RoundedRectangle clicked={clicked} current={current} scale={[1,1,1]} position={pos6} rotation={pos6[3]} reference={portal6} portalNum={6} color={'yellow'}>
           <MeshPortalMaterial attach='material' resolution={2} side={THREE.DoubleSide} blend={scene6}>
-              <Text position={[2.5,6.5,1]} fontSize={0.8} an >Portal {6}</Text>
               <Image scale={[6,10,5]} position={[2.5,5,0]} url='portal6pic.jpeg'></Image>
 
               <Environment preset='city'/>
