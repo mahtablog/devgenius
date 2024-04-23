@@ -198,7 +198,7 @@ const changeScene=(setScene)=>{
      <div style={{height:'100dvh',width:'100dvw',display:'flex',justifyContent:"center",alignItems:"center"}}>
       <Canvas style={{backgroundColor:"#E5BAB5"}}   >
         <PerspectiveCamera   ref={camera} position={[60,15,-73]} rotation={[0,0,0]}>
-          <CameraControls  />
+          <CameraControls minAzimuthAngle={-5*(Math.PI/180)} maxAzimuthAngle={5*(Math.PI/180)} minPolarAngle={90*(Math.PI/180)} maxPolarAngle={0*(Math.PI/180)} truckSpeed={0} maxDistance={5} minDistance={5} ref={control} />
             
          
           <RoundedRectangle clicked={clicked} current={current} scale={[1,1,1]} position={pos1} rotation={pos1[3]} reference={portal1} portalNum={1} >
