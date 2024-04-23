@@ -8,7 +8,9 @@ import * as THREE from 'three'
 import _ from 'lodash';
 import { Link, Route, Routes } from 'react-router-dom';
  function App() {
-
+  
+  const isMobile=window.matchMedia("only screen and (max-width: 767px)").matches
+  
   const camera=useRef()
   const portal1=useRef()
   const portal2=useRef()

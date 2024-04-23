@@ -6,6 +6,7 @@ import { Bar } from './Bar'
 import gsap from 'gsap'
 import { Link } from 'react-router-dom'
 export default function Portal1(){
+    const isMobile=window.matchMedia("only screen and (max-width: 767px)").matches
     const [isPlaying,setisPlaying] =useState(true)
     const audio=useRef()
     const [curentscreen,setcurrentscreen] = useState('1')
@@ -20,12 +21,28 @@ export default function Portal1(){
     const [currentPhase,setCurrentPhase] = useState('enterScreen')
     const [audiobtntext,setaudiobtntext] = useState('Mute')
     const [entered,setentered]=useState(false)
+
+    const pos1=isMobile?[-9,2,-15]:[-40,5,10]
+    const pos2=isMobile?[0,-10,5]:[0,5,10]
+    const pos3=isMobile?[12,5,-25]:[40,5,10]
+    
+    console.log(pos1,'lmao')
     const enter=()=>{
-        gsap.to(camera.current.position,{z:-20})
-        gsap.to(camera.current.position,{y:-5})
-        gsap.to(camera.current.position,{x:40})
-        setCurrentPhase("pickScreen")
-        setentered(true)
+        if (isMobile){
+            gsap.to(camera.current.position,{z:-25})
+            gsap.to(camera.current.position,{y:10})
+            gsap.to(camera.current.position,{x:0})
+            setCurrentPhase("pickScreen")
+            setentered(true)
+        }
+        else{
+            gsap.to(camera.current.position,{z:-20})
+            gsap.to(camera.current.position,{y:-5})
+            gsap.to(camera.current.position,{x:40})
+            setCurrentPhase("pickScreen")
+            setentered(true)
+        }
+        
     }
     const openbottle=()=>{
         
@@ -81,28 +98,64 @@ export default function Portal1(){
     }
 
     const screen1=()=>{
-        gsap.to(camera.current.position,{x:40})
-        gsap.to('.blackline1',{width:"0%"})
-        gsap.to('.blackline2',{width:"0%"})
-        gsap.to('.sliderimg',{left:"0%"})
-        setcurrentscreen('1')
+        if (isMobile){
+            gsap.to(camera.current.position,{z:-25})
+            gsap.to(camera.current.position,{y:10})
+            gsap.to(camera.current.position,{x:0})
+            gsap.to('.blackline1',{width:"0%"})
+            gsap.to('.blackline2',{width:"0%"})
+            gsap.to('.sliderimg',{left:"-1%"})
+            setcurrentscreen('1')
+        }
+        else{
+            gsap.to(camera.current.position,{x:40})
+            gsap.to('.blackline1',{width:"0%"})
+            gsap.to('.blackline2',{width:"0%"})
+            gsap.to('.sliderimg',{left:"0%"})
+            setcurrentscreen('1')
+        }
+        
 
     }
     const screen2=()=>{
-        gsap.to(camera.current.position,{x:0})
-        gsap.to('.blackline1',{width:"37%"})
-        gsap.to('.blackline2',{width:"0%"})
-        gsap.to('.sliderimg',{left:"45%"})
-        setcurrentscreen('2')
+        if(isMobile){
+            gsap.to(camera.current.position,{z:-3})
+            gsap.to(camera.current.position,{y:-5})
+            gsap.to(camera.current.position,{x:9})
+            gsap.to('.blackline1',{width:"30%"})
+            gsap.to('.blackline2',{width:"0%"})
+            gsap.to('.sliderimg',{left:"41%"})
+            setcurrentscreen('2')
+        }
+        else{
+            gsap.to(camera.current.position,{x:0})
+            gsap.to('.blackline1',{width:"37%"})
+            gsap.to('.blackline2',{width:"0%"})
+            gsap.to('.sliderimg',{left:"45%"})
+            setcurrentscreen('2')
+        }
+        
 
 
     }
     const screen3=()=>{
-        gsap.to(camera.current.position,{x:-40})
-        gsap.to('.blackline1',{width:"37%"})
-        gsap.to('.blackline2',{width:"40%"})
-        gsap.to('.sliderimg',{left:"94%"})
+        if(isMobile){
+            gsap.to(camera.current.position,{z:5})
+            gsap.to(camera.current.position,{y:-5})
+            gsap.to(camera.current.position,{x:-12})
+            gsap.to('.blackline1',{width:"30%"})
+            gsap.to('.blackline2',{width:"30%"})
+            gsap.to('.sliderimg',{left:"83%"})
+            setcurrentscreen('3')
+        }
+        else{
+            gsap.to(camera.current.position,{x:-40})
+            gsap.to('.blackline1',{width:"37%"})
+            gsap.to('.blackline2',{width:"40%"})
+            gsap.to('.sliderimg',{left:"94%"})
         setcurrentscreen('3')
+        }
+        
 
 
     }
@@ -120,6 +173,9 @@ export default function Portal1(){
     return(
         <div style={{height:'100dvh',width:'100dvw',display:'flex',justifyContent:"center",alignItems:"center"}}>
         <audio src='bgmusic.mp3' ref={audio}></audio>
+        <img className='logo' src='slider.png'></img>
+        <h2 className='welcome'>WELCOME TO THE</h2>
+        <h2 className='spritzer'>Spritzer-Verse</h2>
         {currentPhase==='enterScreen' && <button onClick={enter} className='enterbtn' >Enter journey</button>}
         {entered &&  <div className='slider'>
             
@@ -174,9 +230,9 @@ export default function Portal1(){
                     
                     
                     
-                    <Image scale={[15,13,13]} position={[-40,5,10]} url='/world 1.png'></Image>
-                    <Image scale={[15,13,13]} position={[0,5,10]} url='/world 2.png'></Image>
-                    <Image scale={[15,13,13]} position={[40,5,10]} url='/world 3.png'></Image>
+                    <Image scale={[15,13,13]} position={pos1} url='/world 1.png'></Image>
+                    <Image scale={[15,13,13]} position={pos2} url='/world 2.png'></Image>
+                    <Image scale={[15,13,13]} position={pos3} url='/world 3.png'></Image>
                     
                     {entered && currentPhase==='pickScreen' && <TouchPoint clicked={openbottle} position={[-40,8,11]}/>}
                     {entered &&currentPhase==='pickScreen' && <TouchPoint clicked={openvideo} position={[-36,2,11]}/>}

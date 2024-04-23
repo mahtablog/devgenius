@@ -354,7 +354,7 @@
   z-index: 1;
   top: 92dvh;
   border: 2px solid white;
-  border-radius: 2px;
+  border-radius: 5px;
   font-size: 1.5dvw;
   color: #6d5e5b;
   background-color: transparent;
@@ -388,6 +388,28 @@
   height: 0dvh;
   width: 0dvw;
 }
+.logo{
+  position: absolute;
+  z-index: 1;
+  height: 14dvh;
+  width: 7dvw;
+  top: 1%;
+}
+.welcome{
+  position: absolute;
+  z-index: 1;
+  font-size: 4dvh;
+  top: 15%;
+  color: white;
+  font-weight: 100;
+}
+.spritzer{
+  position: absolute;
+  z-index: 1;
+  font-size: 7.5dvh;
+  top: 18%;
+  color: white;
+}
 @media only screen and (max-width: 767px) {
   /* Add your phone-specific styles here */
   .title {
@@ -418,5 +440,72 @@
   .subheading{
     font-size: 2.5dvh;
   }
+  .enterbtn{
+    top: 86%;
+    width: 40dvw;
+    font-size: 2.5dvh;
+  }
+  .returnbtn{
+    width: 40dvw;
+    font-size: 2.5dvh;
+  }
+  .audiobtn{
+    width: 12dvw;
+    height: 6dvh;
+  }
+  .logo{
+    position: absolute;
+    z-index: 1;
+    height: 10dvh;
+    width: 20dvw;
+    top: 5%;
+  }
+  .welcome{
+    position: absolute;
+    z-index: 1;
+    font-size: 3dvh;
+    top: 15%;
+    color: white;
+    font-weight: 100;
+  }
+  .spritzer{
+    position: absolute;
+    z-index: 1;
+    font-size: 6dvh;
+    top: 18%;
+    color: white;
+  }
+  .slider{
+    width: 70dvw;
+    top: 75%;
+  }
+  .sliderimg{
+    width: 11dvw;
+    height: 6dvh;
+  }
+  .sliderbtn1,.sliderbtn2,.sliderbtn3{
+    height: 4dvh;
+    width: 8dvw;
+  }
+  .sliderbtn3{
+    left: 85%;
+  }
+  .whiteline2{
+    width: 30%;
+    left: 55%;
+ }
+ .blackline2{
+  width: 30%;
+  left: 55%;
+}
+.whiteline1{
+  width: 30%;
+  left: 13%;
+}
+.blackline1{
+  width: 30%;
+  left: 13%;
+}
+
   /* Any other styles you want to adjust for phones */
 }
