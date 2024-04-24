@@ -46,6 +46,10 @@ export default function Portal1(){
     }
     const openbottle=()=>{
         
+        if (isMobile){
+            gsap.to('.returnbtn',{height:'0dvh'})
+            gsap.to('.returnbtn',{width:'0dvw'})
+        }
         gsap.to(".bottlescreen",{width:"75dvw"})
         gsap.to(".bottle",{width:"15dvw"})
         gsap.to(".bottle",{height:"70dvh"})
@@ -60,9 +64,13 @@ export default function Portal1(){
         gsap.to(".bottle",{width:"0dvw"})
         gsap.to(".bottle",{height:"0dvh"})
         gsap.to('.slider',{height:'10dvh'})
-        gsap.to('.slider',{width:'30dvw'})
-
-
+        if (isMobile)
+        {
+            gsap.to('.slider',{width:'70dvw'})
+            gsap.to('.returnbtn',{height:'5dvh'})
+            gsap.to('.returnbtn',{width:'40dvw'})
+    }
+        else gsap.to('.slider',{width:'30dvw'})
         setCurrentPhase('pickScreen')
 
     }
@@ -70,15 +78,21 @@ export default function Portal1(){
             gsap.to('.lyricscreen',{height:'40dvh'})
             gsap.to('.lyricscreen',{width:'30dvw'})
             gsap.to('.slider',{height:'0dvh'})
-        gsap.to('.slider',{width:'0dvw'})
+            gsap.to('.slider',{width:'0dvw'})
             setCurrentPhase('lyricsScreen')
     }
     const closeplaylist=()=>{
+        
+        if (isMobile){
+            gsap.to('.slider',{width:'70dvw'})
+        }else {
+            gsap.to('.slider',{width:'30dvw'})
+
+        }
             gsap.to('.lyricscreen',{height:'0dvh'})
             gsap.to('.lyricscreen',{width:'0dvw'})
             
             gsap.to('.slider',{height:'10dvh'})
-        gsap.to('.slider',{width:'30dvw'})
             setCurrentPhase('pickScreen')
     }
     const openvideo=()=>{
@@ -90,10 +104,15 @@ export default function Portal1(){
 
     }
     const closevideo=()=>{
+        if (isMobile){
+            gsap.to('.slider',{width:'70dvw'})
+        }else {
+            gsap.to('.slider',{width:'30dvw'})
+
+        }
         gsap.to('.videoscreen',{height:'0dvh'})
         gsap.to('.videoscreen',{width:'0dvw'})
         gsap.to('.slider',{height:'10dvh'})
-        gsap.to('.slider',{width:'30dvw'})
         setCurrentPhase('pickScreen')
     }
 
@@ -173,12 +192,13 @@ export default function Portal1(){
     return(
         <div style={{height:'100dvh',width:'100dvw',display:'flex',justifyContent:"center",alignItems:"center"}}>
         <audio src='bgmusic.mp3' ref={audio}></audio>
-        <img className='logo' src='slider.png'></img>
-        <h2 className='welcome'>WELCOME TO THE</h2>
-        <h2 className='spritzer'>Spritzer-Verse</h2>
+        {!entered &&<img className='logo' src='slider.png'></img>}
+        {!entered &&<h2 className='welcome'>WELCOME TO THE</h2>}
+        {!entered &&<h2 className='spritzer'>Spritzer-Verse</h2>}
+        
         {currentPhase==='enterScreen' && <button onClick={enter} className='enterbtn' >Enter journey</button>}
+       
         {entered &&  <div className='slider'>
-            
             <div className='whiteline1'></div>
             <div className='blackline1'></div>
             <div className='whiteline2'></div>
@@ -187,19 +207,12 @@ export default function Portal1(){
             {curentscreen!=='1' && <button onClick={screen1} className='sliderbtn1'> </button>}
             {curentscreen!=='2' && <button onClick={screen2} className='sliderbtn2'> </button>}
             {curentscreen!=='3' &&<button onClick={screen3} className='sliderbtn3'> </button>}
-            </div>}
-        {  <div className='bottlescreen'>
-            <button onClick={closebottle} style={{top:"10%",position:"absolute",height:"4dvh",width:"2dvw",right:'10%',border:'0px',backgroundColor:"black",color:"white",borderRadius:"50%",cursor:"pointer"}}>X</button>
-            <h1 style={{fontSize:'4vh'}}>BRUTAL FRUIT SPRITZER RUBY APPLE</h1>
-            <p1 style={{fontSize:'3vh'}}>Ruby Apple is an exquisite infusion citrus and apple flavouring with a hint of grapefruit. The balance of sweet and zesty is complemented by delicate notes of fruit, spice and honey providing a gorgeous depth of citrus.</p1>
-            <div className='stats'>
-                <div className='statsboxes'> <h2>5,00</h2> <p2 style={{fontSize:"2vh"}} >Alcohol by volume</p2></div>
-                <div className='statsboxes'><h2>5,00</h2><p2 style={{fontSize:"2vh"}} >Alcohol by volume</p2></div>
-                <div className='statsboxes'><h2>5,00</h2><p2 style={{fontSize:"2vh"}} >Alcohol by volume</p2></div>
-                <div className='statsboxes'><h2>5,00</h2><p2 style={{fontSize:"2vh"}} >Alcohol by volume</p2></div>
-                <div className='statsboxes'> <h2>5,00</h2><p2 style={{fontSize:"2vh"}} >Alcohol by volume</p2></div>
-            </div>
-       </div>}
+         </div>}
+
+
+        {curentscreen==='1' && <BottleScreen currentScreen={currentPhase} isMobile={isMobile} closeBottle={closebottle} title={'BRUTAL FRUIT SPRITZER RUBY APPLE'} paragraph={'Ruby Apple is an exquisite infusion citrus and apple flavouring with a hint of grapefruit. The balance of sweet and zesty is complemented by delicate notes of fruit, spice and honey providing a gorgeous depth of citrus.'}/> }
+        {curentscreen==='2' && <BottleScreen currentScreen={currentPhase} isMobile={isMobile} closeBottle={closebottle} title={'BRUTAL FRUIT SPRITZER STRAWBERRY ROUGE'} paragraph={'Strawberry Rouge is a drink complemented by a fruity blend of wild strawberry and crisp apple flavouring that offers a slightly more sweet than sour taste. The liquid has hints of floral botanicals and cotton candy which provides depth and complexity.'}/> }
+        {curentscreen==='3' && <BottleScreen currentScreen={currentPhase} isMobile={isMobile} closeBottle={closebottle} title={'BRUTAL FRUIT SPRITZER LITCHI SEECHE'} paragraph={'Litchi Seche is a sophisticated drink complemented by an infusion of litchi and apple flavouring. The liquid is prepped with hints of white blossom and peach to create a perfect sparkling blend of golden demi-sec refreshment. '}/> }
 
        {<div className='lyricscreen'>
         <div className='top'>
@@ -216,13 +229,14 @@ export default function Portal1(){
         </div>}
 
         {currentPhase==='videoScreen' && <button onClick={closevideo} className='vidbtn'>X</button>}
+
         {<button className='returnbtn'><Link style={{textDecoration:"none",color:"white"}} to={'/'}>Return to Home</Link></button>}
         
         {<img src='sound-bars.png' onClick={handleAudio} className='audiobtn'></img>}
 
-        {curentscreen==='1'&&<img src='bottle.png' className='bottle'></img>}
-        {curentscreen==='2'&&<img src='bottle3.jpeg' className='bottle'></img>}
-        {curentscreen==='3'&&<img src='bottle2.jpeg' className='bottle'></img>}
+        {curentscreen==='1'&& !isMobile && <img src='bottle.png' className='bottle'></img>}
+        {curentscreen==='2'&& !isMobile && <img src='bottle3.png' className='bottle'></img>}
+        {curentscreen==='3'&& !isMobile && <img src='bottle2.png' className='bottle'></img>}
         
             <Canvas style={{backgroundImage:'url("bg.jpeg")',backgroundRepeat:"no-repeat",backgroundSize:"cover"}}   >
                 <PerspectiveCamera   ref={camera} position={[0,-7,-45]} rotation={[0,0,0]}>
@@ -230,9 +244,9 @@ export default function Portal1(){
                     
                     
                     
-                    <Image scale={[15,13,13]} position={pos1} url='/world 1.png'></Image>
-                    <Image scale={[15,13,13]} position={pos2} url='/world 2.png'></Image>
-                    <Image scale={[15,13,13]} position={pos3} url='/world 3.png'></Image>
+                    <Image transparent scale={[15,13,13]} position={pos1} url='/world 1.png'></Image>
+                    <Image transparent scale={[15,13,13]} position={pos2} url='/world 2.png'></Image>
+                    <Image transparent scale={[15,13,13]} position={pos3} url='/world 3.png'></Image>
                     
                     {entered && currentPhase==='pickScreen' && <TouchPoint clicked={openbottle} position={[-40,8,11]}/>}
                     {entered &&currentPhase==='pickScreen' && <TouchPoint clicked={openvideo} position={[-36,2,11]}/>}
@@ -270,10 +284,78 @@ const TouchPoint=({position,clicked})=>{
     </group>
     )
 }
+
+
+const BottleScreen=({closeBottle,title,paragraph,isMobile,currentScreen})=>{
+    return(
+        <>
+        {isMobile  && currentScreen==='bottleScreen' && <button onClick={closeBottle} className='closebtnmobile'>X</button>}
+        <div className='bottlescreen'>
+        {!isMobile && <button onClick={closeBottle} className='closebtn'>X</button>}
+        
+        <h1>{title}</h1>
+        <p1 >{paragraph}</p1>
+        <img src='sliderbg.png' className='bottlelogobg'></img>
+        {!isMobile && <div className='stats'>
+            <div className='innertop'>
+                <div className='innertopbox'><h2>5,00</h2></div>
+                <div className='innertopbox'><h2>7,00</h2></div>
+                <div className='innertopbox'><h2>63,00</h2></div>
+                <div className='innertopbox'><h2>263,00</h2></div>
+                <div className='innertopbox'><h2>6,80</h2></div>
+            </div>
+            <div className='innerbottom'>
+                <div className='innerbottombox'><p2 style={{fontSize:"2.1vh"}} >Alcohol by volume</p2></div>
+                <div className='innerbottombox'><p2 style={{fontSize:"2.1vh"}} >CarboHydrates G/100ml</p2></div>
+                <div className='innerbottombox'><p2 style={{fontSize:"2.1vh"}} >Energy Kcal/100ml</p2></div>
+                <div className='innerbottombox'><p2 style={{fontSize:"2.1vh"}} >Energy Kj</p2></div>
+                <div className='innerbottombox'><p2 style={{fontSize:"2.1vh"}} >Sugar G/100</p2></div>
+            </div>
+        </div>}
+
+        {isMobile && 
+        <div className='statsmobile'>
+            <div className='innerstatsmobile' >
+                <div className='i2m'>
+                    <div className='i2mbox'><h2>5,00</h2></div>
+                    <div className='i2mbox'><h2>7,00</h2></div>
+                    <div className='i2mbox'><h2>63,00</h2></div>
+                </div>
+                <div className='i2m'>
+                    <div className='i2mbox'><p2>Alcohol by volume</p2></div>
+                    <div className='i2mbox'><p2>CarboHydrates G/100ml</p2></div>
+                    <div className='i2mbox'><p2>Energy Kcal/100ml</p2></div>
+                </div>
+            </div>
+            <div className='innerstatsmobile2' >
+                <div className='i2m2'>
+                 <div className='i2mbox2'><h2>263,00</h2></div>
+                 <div className='i2mbox2'><h2>6,80</h2></div>
+
+                </div>
+                <div className='i2m2'>
+                 <div className='i2mbox2'><p2  >Energy Kj</p2></div>
+                 <div className='i2mbox2'><p2  >Sugar G/100</p2></div>
+
+                </div>
+            </div>
+        </div>
+
+        }
+   </div>
+   </>
+    )
+}
 /*
 
         <Bar rotation={[0,0*(Math.PI/180),0]} scale={[0.20,0.20,0.20]}/>
         <Bar position={[35,0,0]} rotation={[0,0*(Math.PI/180),0]} scale={[0.20,0.20,0.20]}/>
         <Bar position={[-35,0,0]} rotation={[0,0*(Math.PI/180),0]} scale={[0.20,0.20,0.20]}/>
+
+        <div className='statsboxes'>  </div>
+            <div className='statsboxes'></div>
+            <div className='statsboxes'></div>
+            <div className='statsboxes'></div>
+            <div className='statsboxes'> </div>
 
 */

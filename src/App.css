@@ -60,6 +60,18 @@
   width: 30%;
   text-align: center;
 }
+.closebtn{
+  top:10%;
+  position:absolute;
+  height:4dvh;
+  width:2dvw;
+  right:10%;
+  border:0px;
+  background-color:black;
+  color:white;
+  border-radius:50%;
+  cursor:pointer;
+}
 .current{
   position:absolute;
   z-index:1;
@@ -265,30 +277,54 @@
   position: absolute;
   left: 20%;
   top: 50%;
+  text-align: center;
+  font-size: 3dvh;
   
 }
 .bottlescreen h1{
   position: absolute;
   left: 20%;
   top: 25%;
+  font-size: 5dvh;
 }
 .stats{
-  height: 20%;
+  height: 15%;
   width: 70%;
   position: absolute;
   left: 20%;
   top: 70%;
   display: flex;
-  justify-content: space-between;
+  flex-direction: column;
+}
+.innertop{
+  height: 50%;
+  width: 100%;
+  display: flex;
+}
+.innerbottom{
+  height: 50%;
+  width: 100%;
+  display: flex;
+}
+.innertopbox{
+  width: 20%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
   align-items: center;
 }
-.statsboxes{
+.innerbottombox{
+  width: 20%;
+  height: 100%;
   display: flex;
-  justify-content: space-around;
+  justify-content: center;
   align-items: center;
-  height: 70%;
-  width: 15%;
-  flex-direction: column;
+}
+.statsboxes p2{
+  text-align: center;
+}
+.statsboxes h2{
+  text-align: center;
 }
 
 .lyricscreen{
@@ -410,6 +446,15 @@
   top: 18%;
   color: white;
 }
+.bottlelogobg{
+  height: 80dvh;
+  width: 40dvw;
+  left: -7%;
+  top: -10%;
+  opacity: 0.3;
+  position: absolute;
+  z-index: -1;  
+}
 @media only screen and (max-width: 767px) {
   /* Add your phone-specific styles here */
   .title {
@@ -505,6 +550,114 @@
 .blackline1{
   width: 30%;
   left: 13%;
+}
+.bottlescreen{
+  background-color: white;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  border-radius: 150px;
+  transform: translate(-50%, -50%); 
+}
+.bottlescreen h1{
+  font-size: 2.5dvh;
+  text-align: center;
+  left: 50%;
+  top: 25%;
+  width: 90%;
+  transform: translate(-50%, -50%); 
+}
+.bottlescreen p1{
+  left: 50%;
+  top: 50%;
+  width: 90%;
+  transform: translate(-50%, -50%); 
+  font-size: 2.1dvh;
+}
+.statsmobile{
+  width: 90%;
+  height: 25%;
+  position: absolute;
+  top: 80%;
+  left: 50%;
+  transform: translate(-50%, -50%); 
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.innerstatsmobile{
+  height: 50%;
+  width: 100%;
+}
+.innerstatsmobile2{
+  height: 50%;
+  width: 50%;
+}
+.i2m2{
+  display: flex;
+  height: 50%;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+}
+.i2mbox2{
+  width: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+.i2mbox2 h2{
+  text-align: center;
+  font-size: 2.3dvh;
+}
+.i2mbox2 p2{
+  font-size: 1.5dvh;
+  text-align: center;
+}
+.i2m{
+  height: 50%;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.i2mbox{
+  width: 30%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.i2mbox h2{
+  text-align: center;
+  font-size: 2.3dvh;
+}
+.i2mbox p2{
+  text-align: center;
+  font-size: 1.5dvh;
+}
+.closebtnmobile{
+  z-index: 2;
+  top:5%;
+  position:absolute;
+  height:5dvh;
+  width:10dvw;
+  right:10%;
+  border:0px;
+  background-color:black;
+  color:white;
+  border-radius:50%;
+  cursor:pointer;
+}
+.bottlelogobg{
+  height: 40dvh;
+  width: 80dvw;
+  left: -5%;
+  top: -5%;
+  opacity: 0.3;
+  position: absolute;
+  z-index: -1;  
 }
 
   /* Any other styles you want to adjust for phones */
