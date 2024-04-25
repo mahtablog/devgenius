@@ -370,14 +370,14 @@
   width: 2.5dvw;
   position: absolute;
   z-index: 2;
-  top: 5dvh;
+  top: 19dvh;
+  right: 8dvw;
   font-size: 1.5dvw;
   border-radius: 50%;
   cursor: pointer;
   color: gray;
   border: 2px solid gray;
   transition: 0.2s;
-
 }
 .vidbtn:hover{
   transform: scale(1.2);
@@ -455,6 +455,13 @@
   position: absolute;
   z-index: -1;  
 }
+.name {
+  position: absolute;
+  z-index: 1;
+  bottom: 22dvh;
+  color: white;
+  font-size: 3.5dvh;
+}
 @media only screen and (max-width: 767px) {
   /* Add your phone-specific styles here */
   .title {
@@ -522,7 +529,7 @@
   }
   .slider{
     width: 70dvw;
-    top: 75%;
+    top: 80%;
   }
   .sliderimg{
     width: 11dvw;
@@ -658,6 +665,10 @@
   opacity: 0.3;
   position: absolute;
   z-index: -1;  
+}
+.vidbtn{
+  width: 10dvw;
+  font-size: 2.5dvh;
 }
 
   /* Any other styles you want to adjust for phones */

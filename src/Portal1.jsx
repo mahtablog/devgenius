@@ -1,10 +1,13 @@
 import './App.css'
-import { Canvas } from '@react-three/fiber'
-import { PerspectiveCamera,CameraControls, Environment, Html, Image, Circle, Box } from '@react-three/drei'
+import { Canvas, useFrame } from '@react-three/fiber'
+import { PerspectiveCamera,CameraControls, Environment, Html, Image, Circle, Box, Gltf, useGLTF } from '@react-three/drei'
 import { useEffect, useRef, useState } from 'react'
 import { Bar } from './Bar'
 import gsap from 'gsap'
 import { Link } from 'react-router-dom'
+import { AppleBottle } from './AppleBottle'
+import { StrawberryBottle } from './StrawberryBottle'
+import { LitchiBottle } from './LitchiBottle'
 export default function Portal1(){
     const isMobile=window.matchMedia("only screen and (max-width: 767px)").matches
     const [isPlaying,setisPlaying] =useState(true)
@@ -21,12 +24,30 @@ export default function Portal1(){
     const [currentPhase,setCurrentPhase] = useState('enterScreen')
     const [audiobtntext,setaudiobtntext] = useState('Mute')
     const [entered,setentered]=useState(false)
+    const [currentName,setCurrentName]=useState('Strawberry Rouge')
 
-    const pos1=isMobile?[-9,2,-15]:[-40,5,10]
-    const pos2=isMobile?[0,-10,5]:[0,5,10]
+    const pos1=isMobile?[-9,-1,-15]:[-40,5,10]
+    const pos2=isMobile?[0,-12,5]:[0,5,10]
     const pos3=isMobile?[12,5,-25]:[40,5,10]
+
+    const appleBottlePos=[-40,7,11]
+    const strawberryBottlePos=[0,6.5,11]
+    const LitchiBottlePos=[40,5.8,11]
+
+
+
+    const appleref=useRef()
+    const strawberryref=useRef()
+    const litchiref=useRef()
+
+    const [hovering,setHovering]=useState(false)
+
+    const rotateBottle=()=>{
+        if (hovering){
+
+        }
+    }
     
-    console.log(pos1,'lmao')
     const enter=()=>{
         if (isMobile){
             gsap.to(camera.current.position,{z:-25})
@@ -36,8 +57,8 @@ export default function Portal1(){
             setentered(true)
         }
         else{
-            gsap.to(camera.current.position,{z:-20})
-            gsap.to(camera.current.position,{y:-5})
+            gsap.to(camera.current.position,{z:-17})
+            gsap.to(camera.current.position,{y:-3})
             gsap.to(camera.current.position,{x:40})
             setCurrentPhase("pickScreen")
             setentered(true)
@@ -72,8 +93,7 @@ export default function Portal1(){
     }
         else gsap.to('.slider',{width:'30dvw'})
         setCurrentPhase('pickScreen')
-
-    }
+}
     const openplaylist=()=>{
             gsap.to('.lyricscreen',{height:'40dvh'})
             gsap.to('.lyricscreen',{width:'30dvw'})
@@ -124,6 +144,8 @@ export default function Portal1(){
             gsap.to('.blackline1',{width:"0%"})
             gsap.to('.blackline2',{width:"0%"})
             gsap.to('.sliderimg',{left:"-1%"})
+            setCurrentName('Strawberry Rougue')
+
             setcurrentscreen('1')
         }
         else{
@@ -132,6 +154,7 @@ export default function Portal1(){
             gsap.to('.blackline2',{width:"0%"})
             gsap.to('.sliderimg',{left:"0%"})
             setcurrentscreen('1')
+            
         }
         
 
@@ -145,6 +168,8 @@ export default function Portal1(){
             gsap.to('.blackline2',{width:"0%"})
             gsap.to('.sliderimg',{left:"41%"})
             setcurrentscreen('2')
+            setCurrentName('Ruby Apple')
+
         }
         else{
             gsap.to(camera.current.position,{x:0})
@@ -152,6 +177,7 @@ export default function Portal1(){
             gsap.to('.blackline2',{width:"0%"})
             gsap.to('.sliderimg',{left:"45%"})
             setcurrentscreen('2')
+
         }
         
 
@@ -165,6 +191,8 @@ export default function Portal1(){
             gsap.to('.blackline1',{width:"30%"})
             gsap.to('.blackline2',{width:"30%"})
             gsap.to('.sliderimg',{left:"83%"})
+            setCurrentName('Litchi Seeche')
+
             setcurrentscreen('3')
         }
         else{
@@ -192,6 +220,7 @@ export default function Portal1(){
     return(
         <div style={{height:'100dvh',width:'100dvw',display:'flex',justifyContent:"center",alignItems:"center"}}>
         <audio src='bgmusic.mp3' ref={audio}></audio>
+        {isMobile && entered && <h2 className='name'>{currentName}</h2>}
         {!entered &&<img className='logo' src='slider.png'></img>}
         {!entered &&<h2 className='welcome'>WELCOME TO THE</h2>}
         {!entered &&<h2 className='spritzer'>Spritzer-Verse</h2>}
@@ -214,6 +243,11 @@ export default function Portal1(){
         {curentscreen==='2' && <BottleScreen currentScreen={currentPhase} isMobile={isMobile} closeBottle={closebottle} title={'BRUTAL FRUIT SPRITZER STRAWBERRY ROUGE'} paragraph={'Strawberry Rouge is a drink complemented by a fruity blend of wild strawberry and crisp apple flavouring that offers a slightly more sweet than sour taste. The liquid has hints of floral botanicals and cotton candy which provides depth and complexity.'}/> }
         {curentscreen==='3' && <BottleScreen currentScreen={currentPhase} isMobile={isMobile} closeBottle={closebottle} title={'BRUTAL FRUIT SPRITZER LITCHI SEECHE'} paragraph={'Litchi Seche is a sophisticated drink complemented by an infusion of litchi and apple flavouring. The liquid is prepped with hints of white blossom and peach to create a perfect sparkling blend of golden demi-sec refreshment. '}/> }
 
+        {curentscreen==='1'&& !isMobile && <img src='bottle.png' className='bottle'></img>}
+        {curentscreen==='2'&& !isMobile && <img src='bottle3.png' className='bottle'></img>}
+        {curentscreen==='3'&& !isMobile && <img src='bottle2.png' className='bottle'></img>}
+
+
        {<div className='lyricscreen'>
         <div className='top'>
             <h2>Spotify Playlist</h2>
@@ -225,18 +259,16 @@ export default function Portal1(){
         </div>}
 
         {<div className='videoscreen'>
-            <iframe width="100%" height="100%" src="https://www.youtube.com/embed/MJt_Z11Ug8E?si=wopCpaXnbXOeo409&amp;controls=0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+            <iframe width="100%" height="100%" src="https://www.youtube.com/embed/MJt_Z11Ug8E?si=wopCpaXnbXOeo409&amp;controls=0" title="YouTube video player" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerPolicy="strict-origin-when-cross-origin" allowFullScreen></iframe>
         </div>}
 
         {currentPhase==='videoScreen' && <button onClick={closevideo} className='vidbtn'>X</button>}
 
         {<button className='returnbtn'><Link style={{textDecoration:"none",color:"white"}} to={'/'}>Return to Home</Link></button>}
         
-        {<img src='sound-bars.png' onClick={handleAudio} className='audiobtn'></img>}
+        {<img  src='sound-bars.png' onClick={handleAudio} className='audiobtn'></img>}
 
-        {curentscreen==='1'&& !isMobile && <img src='bottle.png' className='bottle'></img>}
-        {curentscreen==='2'&& !isMobile && <img src='bottle3.png' className='bottle'></img>}
-        {curentscreen==='3'&& !isMobile && <img src='bottle2.png' className='bottle'></img>}
+        
         
             <Canvas style={{backgroundImage:'url("bg.jpeg")',backgroundRepeat:"no-repeat",backgroundSize:"cover"}}   >
                 <PerspectiveCamera   ref={camera} position={[0,-7,-45]} rotation={[0,0,0]}>
@@ -244,10 +276,15 @@ export default function Portal1(){
                     
                     
                     
-                    <Image transparent scale={[15,13,13]} position={pos1} url='/world 1.png'></Image>
+                    <Image  transparent scale={[15,13,13]} position={pos1} url='/world 1.png'></Image>
                     <Image transparent scale={[15,13,13]} position={pos2} url='/world 2.png'></Image>
                     <Image transparent scale={[15,13,13]} position={pos3} url='/world 3.png'></Image>
+
                     
+                    <Apple onPointerEnter={()=>{setHovering(true)}} onPointerLeave={()=>{setHovering(false)}} hovering={hovering} appleref={appleref} scale={[0.6,0.6,0.6]} position={appleBottlePos}/>
+                    <Strawberry  scale={[0.6,0.6,0.6]} position={strawberryBottlePos}/>
+
+
                     {entered && currentPhase==='pickScreen' && <TouchPoint clicked={openbottle} position={[-40,8,11]}/>}
                     {entered &&currentPhase==='pickScreen' && <TouchPoint clicked={openvideo} position={[-36,2,11]}/>}
                     {entered &&currentPhase==='pickScreen' && <TouchPoint clicked={openplaylist} position={[-46,4,11]}/>}
@@ -358,4 +395,42 @@ const BottleScreen=({closeBottle,title,paragraph,isMobile,currentScreen})=>{
             <div className='statsboxes'></div>
             <div className='statsboxes'> </div>
 
+
+
+        {curentscreen==='1'&& !isMobile && <img src='bottle.png' className='bottle'></img>}
+        {curentscreen==='2'&& !isMobile && <img src='bottle3.png' className='bottle'></img>}
+        {curentscreen==='3'&& !isMobile && <img src='bottle2.png' className='bottle'></img>}
 */
+
+const Apple=(props)=>{
+    useFrame(()=>{
+        if (props.hovering){
+            console.log("hovering")
+            props.appleref.current.rotation.x+=0.01
+        }
+    })
+    const { scene } = useGLTF("Apple Bottle.glb");
+    return (
+        <group onMouseEnter={()=>{console.log("ee")}} ref={props.appleref}>
+          <primitive onMouseEnter={()=>{console.log('sss')}} object={scene} {...props} />
+        </group>
+      );
+}
+
+const Strawberry=(props)=>{
+    const { scene } = useGLTF("Strawberry Bottle.glb");
+    return (
+        <group ref={props.strawberryref}>
+          <primitive object={scene} {...props} />
+        </group>
+      );
+}
+
+const Litchi=(props)=>{
+    const { scene } = useGLTF("Litchi Bottle.glb");
+    return (
+        <group ref={props.litchiref}>
+          <primitive object={scene} {...props} />
+        </group>
+      );
+}
