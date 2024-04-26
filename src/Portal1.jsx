@@ -27,7 +27,7 @@ export default function Portal1(){
     const pos2=isMobile?[0,-5,15]:[0,5,10]
     const pos3=isMobile?[12,5,-5]:[40,5,10]
 
-    const strawberryBottlePos=isMobile?[-12,2.5,-5]:[-40,7,11]
+    const strawberryBottlePos=isMobile?[-12,2.5,-5]:[-40,6.2,11]
     const appleBottlePos=isMobile?[0,-3,15]:[0,6.5,11]
     const LitchiBottlePos=isMobile?[12,7,-5]:[40,5.8,11]
 
@@ -70,7 +70,7 @@ export default function Portal1(){
             //gsap.to(strawberryBottle.current.position,{z:15})
 
             gsap.to(strawberryref.current.position,{x:-8})
-            gsap.to(strawberryref.current.position,{y:-5})
+            gsap.to(strawberryref.current.position,{y:-6})
             gsap.to(strawberryref.current.position,{z:20})
 
 
@@ -256,7 +256,7 @@ export default function Portal1(){
     return(
         <div style={{height:'100dvh',width:'100dvw',display:'flex',justifyContent:"center",alignItems:"center"}}>
         <audio src='bgmusic.mp3' ref={audio}></audio>
-        {isMobile && entered && <h2 className='name'>{currentName}</h2>}
+        {entered && <h2 className='name'>{currentName}</h2>}
         {!entered &&<img className='logo' src='slider.png'></img>}
         {!entered &&<h2 className='welcome'>WELCOME TO THE</h2>}
         {!entered &&<h2 className='spritzer'>Spritzer-Verse</h2>}
@@ -439,34 +439,40 @@ const BottleScreen=({closeBottle,title,paragraph,isMobile,currentScreen})=>{
 */
 
 const Apple=(props)=>{
+    const bottle=useRef()
     useFrame(()=>{
-        if (props.hovering){
-            console.log("hovering")
-            props.appleref.current.rotation.x+=0.01
-        }
+        bottle.current.rotation.y+=0.02
     })
-    const { scene } = useGLTF("Apple Bottle.glb");
+    const { scene } = useGLTF("Strawberry Bottle.glb");
     return (
-        <group onMouseEnter={()=>{console.log("ee")}} ref={props.appleref}>
-          <primitive onMouseEnter={()=>{console.log('sss')}} object={scene} {...props} />
+        <group >
+          <primitive ref={bottle} onMouseEnter={()=>{console.log('sss')}} object={scene} {...props} />
         </group>
       );
 }
 
 const Strawberry=(props)=>{
-    const { scene } = useGLTF("Strawberry Bottle.glb");
+    const { scene } = useGLTF("Apple Bottle.glb");
+    const bottle=useRef()
+    useFrame(()=>{
+        bottle.current.rotation.y+=0.02
+    })
     return (
         <group ref={props.strawberryref} >
-          <primitive object={scene} {...props} />
+          <primitive ref={bottle} object={scene} {...props} />
         </group>
       );
 }
 
 const Litchi=(props)=>{
     const { scene } = useGLTF("Litchi Bottle.glb");
+    const bottle=useRef()
+    useFrame(()=>{
+        bottle.current.rotation.y+=0.02
+    })
     return (
         <group ref={props.litchiref}>
-          <primitive object={scene} {...props} />
+          <primitive ref={bottle} object={scene} {...props} />
         </group>
       );
 }
