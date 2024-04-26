@@ -27,7 +27,7 @@ export default function Portal1(){
     const pos2=isMobile?[0,-5,15]:[0,5,10]
     const pos3=isMobile?[12,5,-5]:[40,5,10]
 
-    const strawberryBottlePos=isMobile?[-12,2.5,-5]:[-39,6.2,11]
+    const strawberryBottlePos=isMobile?[-12,1.5,-5]:[-39,6.2,11]
     const appleBottlePos=isMobile?[0,-3,15]:[0,6.5,11]
     const LitchiBottlePos=isMobile?[12,7,-5]:[39,6.8,11]
 
@@ -70,7 +70,7 @@ export default function Portal1(){
             //gsap.to(strawberryBottle.current.position,{z:15})
 
             gsap.to(strawberryref.current.position,{x:-8})
-            gsap.to(strawberryref.current.position,{y:-6})
+            gsap.to(strawberryref.current.position,{y:-5})
             gsap.to(strawberryref.current.position,{z:20})
 
 
