@@ -5,9 +5,6 @@ import { useEffect, useRef, useState } from 'react'
 import { Bar } from './Bar'
 import gsap from 'gsap'
 import { Link } from 'react-router-dom'
-import { AppleBottle } from './AppleBottle'
-import { StrawberryBottle } from './StrawberryBottle'
-import { LitchiBottle } from './LitchiBottle'
 export default function Portal1(){
     const isMobile=window.matchMedia("only screen and (max-width: 767px)").matches
     const [isPlaying,setisPlaying] =useState(true)
@@ -26,20 +23,37 @@ export default function Portal1(){
     const [entered,setentered]=useState(false)
     const [currentName,setCurrentName]=useState('Strawberry Rouge')
 
-    const pos1=isMobile?[-9,-1,-15]:[-40,5,10]
-    const pos2=isMobile?[0,-12,5]:[0,5,10]
-    const pos3=isMobile?[12,5,-25]:[40,5,10]
+    const pos1=isMobile?[-12,0,-5]:[-40,5,10]
+    const pos2=isMobile?[0,-5,15]:[0,5,10]
+    const pos3=isMobile?[12,5,-5]:[40,5,10]
 
-    const appleBottlePos=[-40,7,11]
-    const strawberryBottlePos=[0,6.5,11]
-    const LitchiBottlePos=[40,5.8,11]
+    const strawberryBottlePos=isMobile?[-12,2.5,-5]:[-40,7,11]
+    const appleBottlePos=isMobile?[0,-3,15]:[0,6.5,11]
+    const LitchiBottlePos=isMobile?[12,7,-5]:[40,5.8,11]
 
-
+    const appleimage=useRef()
+    const strawberryimage=useRef()
+    const litchiimage=useRef()
 
     const appleref=useRef()
     const strawberryref=useRef()
     const litchiref=useRef()
 
+    const appleBottle=useRef()
+    const strawberryBottle=useRef()
+    const litchiBottle=useRef()
+
+    const touchpoint1=isMobile?[-20,-2,20]:[-40,8,11]
+    const touchpoint2=isMobile?[-16.9,-7,20]:[-36,2,11]
+    const touchpoint3=isMobile?[-24.6,-5,20]:[-46,4,11]
+    const touchpoint4=isMobile?[0,-2,20]:[-0,8,11]
+    const touchpoint5=isMobile?[-2.5,-7.5,20]:[4,5,11]
+    const touchpoint6=isMobile?[2.5,-8,20]:[-4,4,11]
+    const touchpoint7=isMobile?[20,-2,20]:[40,8,11]
+    const touchpoint8=isMobile?[16.3,-6.5,20]:[44,5,11]
+    const touchpoint9=isMobile?[22.7,-5.8,20]:[36,4,11]
+    
+    
     const [hovering,setHovering]=useState(false)
 
     const rotateBottle=()=>{
@@ -50,9 +64,31 @@ export default function Portal1(){
     
     const enter=()=>{
         if (isMobile){
-            gsap.to(camera.current.position,{z:-25})
-            gsap.to(camera.current.position,{y:10})
-            gsap.to(camera.current.position,{x:0})
+            gsap.to(camera.current.position,{z:-35})
+            gsap.to(camera.current.position,{y:3})
+            gsap.to(camera.current.position,{x:20})
+            //gsap.to(strawberryBottle.current.position,{z:15})
+
+            gsap.to(strawberryref.current.position,{x:-8})
+            gsap.to(strawberryref.current.position,{y:-5})
+            gsap.to(strawberryref.current.position,{z:20})
+
+
+            gsap.to(strawberryimage.current.position,{z:15})
+            gsap.to(strawberryimage.current.position,{y:-5})
+            gsap.to(strawberryimage.current.position,{x:-20})
+
+            gsap.to(litchiref.current.position,{z:20})
+            gsap.to(litchiref.current.position,{y:-10})
+            gsap.to(litchiref.current.position,{x:8})
+
+            gsap.to(litchiimage.current.position,{z:15})
+            gsap.to(litchiimage.current.position,{y:-5})
+            gsap.to(litchiimage.current.position,{x:20})
+
+
+
+            //gsap.to(strawberryimage.current.position,{z:-5})
             setCurrentPhase("pickScreen")
             setentered(true)
         }
@@ -138,9 +174,9 @@ export default function Portal1(){
 
     const screen1=()=>{
         if (isMobile){
-            gsap.to(camera.current.position,{z:-25})
-            gsap.to(camera.current.position,{y:10})
-            gsap.to(camera.current.position,{x:0})
+            gsap.to(camera.current.position,{z:-35})
+            gsap.to(camera.current.position,{y:3})
+            gsap.to(camera.current.position,{x:20})
             gsap.to('.blackline1',{width:"0%"})
             gsap.to('.blackline2',{width:"0%"})
             gsap.to('.sliderimg',{left:"-1%"})
@@ -161,9 +197,9 @@ export default function Portal1(){
     }
     const screen2=()=>{
         if(isMobile){
-            gsap.to(camera.current.position,{z:-3})
-            gsap.to(camera.current.position,{y:-5})
-            gsap.to(camera.current.position,{x:9})
+            gsap.to(camera.current.position,{z:-35})
+            gsap.to(camera.current.position,{y:3})
+            gsap.to(camera.current.position,{x:0})
             gsap.to('.blackline1',{width:"30%"})
             gsap.to('.blackline2',{width:"0%"})
             gsap.to('.sliderimg',{left:"41%"})
@@ -185,9 +221,9 @@ export default function Portal1(){
     }
     const screen3=()=>{
         if(isMobile){
-            gsap.to(camera.current.position,{z:5})
-            gsap.to(camera.current.position,{y:-5})
-            gsap.to(camera.current.position,{x:-12})
+            gsap.to(camera.current.position,{z:-35})
+            gsap.to(camera.current.position,{y:3})
+            gsap.to(camera.current.position,{x:-20})
             gsap.to('.blackline1',{width:"30%"})
             gsap.to('.blackline2',{width:"30%"})
             gsap.to('.sliderimg',{left:"83%"})
@@ -276,28 +312,28 @@ export default function Portal1(){
                     
                     
                     
-                    <Image  transparent scale={[15,13,13]} position={pos1} url='/world 1.png'></Image>
-                    <Image transparent scale={[15,13,13]} position={pos2} url='/world 2.png'></Image>
-                    <Image transparent scale={[15,13,13]} position={pos3} url='/world 3.png'></Image>
+                    <Image ref={strawberryimage}transparent scale={[15,13,13]} position={pos1} url='/world 1.png'></Image>
+                    <Image ref={appleimage} transparent scale={[15,13,13]} position={pos2} url='/world 2.png'></Image>
+                    <Image ref={litchiimage} transparent scale={[15,13,13]} position={pos3} url='/world 3.png'></Image>
 
                     
-                    <Apple onPointerEnter={()=>{setHovering(true)}} onPointerLeave={()=>{setHovering(false)}} hovering={hovering} appleref={appleref} scale={[0.6,0.6,0.6]} position={appleBottlePos}/>
-                    <Strawberry  scale={[0.6,0.6,0.6]} position={strawberryBottlePos}/>
+                    <Apple  onPointerEnter={()=>{setHovering(true)}} onPointerLeave={()=>{setHovering(false)}} hovering={hovering} appleref={appleref} scale={[0.6,0.6,0.6]} position={appleBottlePos}/>
+                    <Strawberry strawberryref={strawberryref}  scale={[0.6,0.6,0.6]} position={strawberryBottlePos}/>
+                    <Litchi litchiref={litchiref} scale={[0.6,0.6,0.6]} position={LitchiBottlePos}/>
 
+                    {entered &&currentPhase==='pickScreen' && <TouchPoint clicked={openbottle} position={touchpoint1}/>}
+                    {entered &&currentPhase==='pickScreen' && <TouchPoint clicked={openvideo} position={touchpoint2}/>}
+                    {entered &&currentPhase==='pickScreen' && <TouchPoint clicked={openplaylist} position={touchpoint3}/>}
 
-                    {entered && currentPhase==='pickScreen' && <TouchPoint clicked={openbottle} position={[-40,8,11]}/>}
-                    {entered &&currentPhase==='pickScreen' && <TouchPoint clicked={openvideo} position={[-36,2,11]}/>}
-                    {entered &&currentPhase==='pickScreen' && <TouchPoint clicked={openplaylist} position={[-46,4,11]}/>}
+                    {entered &&currentPhase==='pickScreen' && <TouchPoint clicked={openbottle} position={touchpoint4}/>}
+                    {entered &&currentPhase==='pickScreen' && <TouchPoint clicked={openvideo} position={touchpoint5}/>}
+                    {entered &&currentPhase==='pickScreen' && <TouchPoint clicked={openplaylist} position={touchpoint6}/>}
 
-                    {entered &&currentPhase==='pickScreen' && <TouchPoint clicked={openbottle} position={[-0,8,11]}/>}
-                    {entered &&currentPhase==='pickScreen' && <TouchPoint clicked={openvideo} position={[4,5,11]}/>}
-                    {entered &&currentPhase==='pickScreen' && <TouchPoint clicked={openplaylist} position={[-4,4,11]}/>}
+                    {entered &&currentPhase==='pickScreen' && <TouchPoint clicked={openbottle} position={touchpoint7}/>}
+                    {entered &&currentPhase==='pickScreen' && <TouchPoint clicked={openvideo} position={touchpoint8}/>}
+                    {entered &&currentPhase==='pickScreen' && <TouchPoint clicked={openplaylist} position={touchpoint9}/>}
 
-                    {entered &&currentPhase==='pickScreen' && <TouchPoint clicked={openbottle} position={[40,8,11]}/>}
-                    {entered &&currentPhase==='pickScreen' && <TouchPoint clicked={openvideo} position={[44,5,11]}/>}
-                    {entered &&currentPhase==='pickScreen' && <TouchPoint clicked={openplaylist} position={[36,4,11]}/>}
-
-
+    
                 </PerspectiveCamera>
                 <Environment preset='city'/>
             </Canvas>
@@ -420,7 +456,7 @@ const Apple=(props)=>{
 const Strawberry=(props)=>{
     const { scene } = useGLTF("Strawberry Bottle.glb");
     return (
-        <group ref={props.strawberryref}>
+        <group ref={props.strawberryref} >
           <primitive object={scene} {...props} />
         </group>
       );
