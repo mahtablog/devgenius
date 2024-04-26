@@ -21,15 +21,15 @@ export default function Portal1(){
     const [currentPhase,setCurrentPhase] = useState('enterScreen')
     const [audiobtntext,setaudiobtntext] = useState('Mute')
     const [entered,setentered]=useState(false)
-    const [currentName,setCurrentName]=useState('Strawberry Rouge')
+    const [currentName,setCurrentName]=useState('Ruby Apple')
 
     const pos1=isMobile?[-12,0,-5]:[-40,5,10]
     const pos2=isMobile?[0,-5,15]:[0,5,10]
     const pos3=isMobile?[12,5,-5]:[40,5,10]
 
-    const strawberryBottlePos=isMobile?[-12,2.5,-5]:[-40,6.2,11]
+    const strawberryBottlePos=isMobile?[-12,2.5,-5]:[-39,6.2,11]
     const appleBottlePos=isMobile?[0,-3,15]:[0,6.5,11]
-    const LitchiBottlePos=isMobile?[12,7,-5]:[40,5.8,11]
+    const LitchiBottlePos=isMobile?[12,7,-5]:[39,6.8,11]
 
     const appleimage=useRef()
     const strawberryimage=useRef()
@@ -96,6 +96,14 @@ export default function Portal1(){
             gsap.to(camera.current.position,{z:-17})
             gsap.to(camera.current.position,{y:-3})
             gsap.to(camera.current.position,{x:40})
+            
+            gsap.to(strawberryref.current.position,{z:0})
+            gsap.to(strawberryref.current.position,{y:0})
+            gsap.to(strawberryref.current.position,{x:-1})
+
+            gsap.to(litchiref.current.position,{z:0})
+            gsap.to(litchiref.current.position,{y:0})
+            gsap.to(litchiref.current.position,{x:1})
             setCurrentPhase("pickScreen")
             setentered(true)
         }
@@ -180,7 +188,7 @@ export default function Portal1(){
             gsap.to('.blackline1',{width:"0%"})
             gsap.to('.blackline2',{width:"0%"})
             gsap.to('.sliderimg',{left:"-1%"})
-            setCurrentName('Strawberry Rougue')
+            setCurrentName('Ruby Apple')
 
             setcurrentscreen('1')
         }
@@ -189,6 +197,7 @@ export default function Portal1(){
             gsap.to('.blackline1',{width:"0%"})
             gsap.to('.blackline2',{width:"0%"})
             gsap.to('.sliderimg',{left:"0%"})
+            setCurrentName('Ruby Apple')
             setcurrentscreen('1')
             
         }
@@ -204,7 +213,7 @@ export default function Portal1(){
             gsap.to('.blackline2',{width:"0%"})
             gsap.to('.sliderimg',{left:"41%"})
             setcurrentscreen('2')
-            setCurrentName('Ruby Apple')
+            setCurrentName('Strawberry Rogue')
 
         }
         else{
@@ -212,6 +221,7 @@ export default function Portal1(){
             gsap.to('.blackline1',{width:"37%"})
             gsap.to('.blackline2',{width:"0%"})
             gsap.to('.sliderimg',{left:"45%"})
+            setCurrentName('Strawberry Rogue')
             setcurrentscreen('2')
 
         }
@@ -236,6 +246,7 @@ export default function Portal1(){
             gsap.to('.blackline1',{width:"37%"})
             gsap.to('.blackline2',{width:"40%"})
             gsap.to('.sliderimg',{left:"94%"})
+            setCurrentName('Litchi Seeche')
         setcurrentscreen('3')
         }
         
