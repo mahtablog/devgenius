@@ -1,10 +1,11 @@
 import './App.css'
 import { Canvas, useFrame } from '@react-three/fiber'
-import { PerspectiveCamera,CameraControls, Environment, Html, Image, Circle, Box, Gltf, useGLTF } from '@react-three/drei'
+import { PerspectiveCamera,CameraControls, Environment, Html, Image, Circle, Box, Gltf, useGLTF, DragControls } from '@react-three/drei'
 import { useEffect, useRef, useState } from 'react'
 import { Bar } from './Bar'
 import gsap from 'gsap'
 import { Link } from 'react-router-dom'
+import { useDrag } from 'react-use-gesture'
 export default function Portal1(){
     const isMobile=window.matchMedia("only screen and (max-width: 767px)").matches
     const [isPlaying,setisPlaying] =useState(true)
@@ -313,13 +314,17 @@ export default function Portal1(){
 
         {<button className='returnbtn'><Link style={{textDecoration:"none",color:"white"}} to={'/'}>Return to Home</Link></button>}
         
-        {<img  src='sound-bars.png' onClick={handleAudio} className='audiobtn'></img>}
+        {<div onClick={handleAudio} className='audiobtn'>
+            <div className='line1'></div>
+            <div className='line2'></div>
+            <div className='line3'></div>
+         </div>}
 
         
         
             <Canvas style={{backgroundImage:'url("bg.jpeg")',backgroundRepeat:"no-repeat",backgroundSize:"cover"}}   >
                 <PerspectiveCamera   ref={camera} position={[0,-7,-45]} rotation={[0,0,0]}>
-                    <CameraControls  />
+                    <CameraControls minAzimuthAngle={0*(Math.PI/180)} maxAzimuthAngle={0*(Math.PI/180)} minPolarAngle={90*(Math.PI/180)} maxPolarAngle={0*(Math.PI/180)} truckSpeed={0} maxDistance={5} minDistance={5} />
                     
                     
                     
@@ -328,9 +333,9 @@ export default function Portal1(){
                     <Image ref={litchiimage} transparent scale={[15,13,13]} position={pos3} url='/world 3.png'></Image>
 
                     
-                    <Apple  onPointerEnter={()=>{setHovering(true)}} onPointerLeave={()=>{setHovering(false)}} hovering={hovering} appleref={appleref} scale={[0.6,0.6,0.6]} position={appleBottlePos}/>
-                    <Strawberry strawberryref={strawberryref}  scale={[0.6,0.6,0.6]} position={strawberryBottlePos}/>
-                    <Litchi litchiref={litchiref} scale={[0.6,0.6,0.6]} position={LitchiBottlePos}/>
+                    <Apple isMobile={isMobile}  appleref={appleref} scale={[0.6,0.6,0.6]} position={appleBottlePos}/>
+                    <Strawberry isMobile={isMobile}  strawberryref={strawberryref}  scale={[0.6,0.6,0.6]} position={strawberryBottlePos}/>
+                    <Litchi isMobile={isMobile}  litchiref={litchiref} scale={[0.6,0.6,0.6]} position={LitchiBottlePos}/>
 
                     {entered &&currentPhase==='pickScreen' && <TouchPoint clicked={openbottle} position={touchpoint1}/>}
                     {entered &&currentPhase==='pickScreen' && <TouchPoint clicked={openvideo} position={touchpoint2}/>}
@@ -450,40 +455,85 @@ const BottleScreen=({closeBottle,title,paragraph,isMobile,currentScreen})=>{
 */
 
 const Apple=(props)=>{
+
     const bottle=useRef()
     useFrame(()=>{
         bottle.current.rotation.y+=0.02
     })
     const { scene } = useGLTF("Strawberry Bottle.glb");
+    const bind = useDrag(({ down, movement: [mx, my], first }) => {
+        if (!props.isMobile){
+
+            if (first) 
+            {
+                setOriginalPosition(bottle.current.position.clone());
+            }       
+            gsap.to(bottle.current.position, {
+            x: down ? mx / 100 : 0,
+            y: down ? (-my / 100)+6.5 : 6.5, // Use '-my' for the y-coordinate
+            duration: down ? 0 : 1,
+        });
+    }
+    });
     return (
-        <group >
-          <primitive ref={bottle} onMouseEnter={()=>{console.log('sss')}} object={scene} {...props} />
+        
+        <group ref={props.appleref}  >
+          <primitive ref={bottle} {...bind()} onMouseEnter={()=>{console.log('sss')}} object={scene} {...props} />
         </group>
+        
       );
 }
 
 const Strawberry=(props)=>{
     const { scene } = useGLTF("Apple Bottle.glb");
-    const bottle=useRef()
+    const bottle2=useRef()
     useFrame(()=>{
-        bottle.current.rotation.y+=0.02
+        bottle2.current.rotation.y+=0.02
     })
+    const bind = useDrag(({ down, movement: [mx, my], first }) => {
+        if (!props.isMobile){
+
+            if (first) 
+            {
+                setOriginalPosition(bottle2.current.position.clone());
+            }       
+            gsap.to(bottle2.current.position, {
+            x: down ? (mx / 100) -39: -39,
+            y: down ? (-my / 100)+6.2 : 6.2, // Use '-my' for the y-coordinate
+            duration: down ? 0 : 1,
+        });
+    }
+    });
     return (
         <group ref={props.strawberryref} >
-          <primitive ref={bottle} object={scene} {...props} />
+          <primitive {...bind()} ref={bottle2} object={scene} {...props} />
         </group>
       );
 }
 
 const Litchi=(props)=>{
     const { scene } = useGLTF("Litchi Bottle.glb");
-    const bottle=useRef()
+    const bottle3=useRef()
     useFrame(()=>{
-        bottle.current.rotation.y+=0.02
+        bottle3.current.rotation.y+=0.02
     })
+    const bind = useDrag(({ down, movement: [mx, my], first }) => {
+        if (!props.isMobile){
+
+            if (first) 
+            {
+                setOriginalPosition(bottle3.current.position.clone());
+            }       
+            gsap.to(bottle3.current.position, {
+            x: down ? (mx / 100) +39: +39,
+            y: down ? (-my / 100)+6.8 : 6.8, // Use '-my' for the y-coordinate
+            duration: down ? 0 : 1,
+        });
+    }
+    });
     return (
         <group ref={props.litchiref}>
-          <primitive ref={bottle} object={scene} {...props} />
+          <primitive {...bind()} ref={bottle3} object={scene} {...props} />
         </group>
       );
 }

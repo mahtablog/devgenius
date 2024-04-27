@@ -28,6 +28,7 @@ import { Link, Route, Routes } from 'react-router-dom';
   const [scene5,setScene5]=useState(0)
   const [scene6,setScene6]=useState(0)
   const [current,setCurrent]=useState(1)
+  const links=['empty','Portal1','spritzer-saturdays-1','spritzer-experiences','shop','form/sign-up','/']
       const pos1=[-62.5,-18.5,65,0]
       const pos2=[-52,-18.5,65,-30]
       const pos3=[-48,-18.5,84,-135]
@@ -184,12 +185,12 @@ const changeScene=(setScene)=>{
     
       {overlay && <h1 className='heading'>Heading one goes here</h1>}
         {overlay && <h2 className='subheading'>Sub heading one goes here</h2>}
-        {overlay && <h1 className='title' >Experience Luxury of portal {current}</h1>}
+        {overlay && <h1 className='title' >{links[current]}</h1>}
         {overlay && <h2 className='title2'>Explore a taste of sophistication with your favourite Spritzer.</h2>}
         {overlay && <img src='right-arrow.png' className='btn1' onClick={right} ></img>}
         {overlay && <img src='right-arrow.png' className='btn2' onClick={left} ></img>}
         {overlay && <h1 className='current' > {current}/6</h1>}
-       <Link to={'Portal1'}> <div class="container">
+       <Link to={links[current]}> <div class="container">
           <div class="dot"></div>
           <div class="outline-circle"></div>
           <div class="outline-circle"></div>

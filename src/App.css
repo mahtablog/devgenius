@@ -412,6 +412,13 @@
   padding: 10px 10px 10px 10px;
   cursor: pointer;
   transition: 0.2s;
+  border-radius: 10px;
+  display: flex;
+}
+.line1,.line2,.line3{
+  height: 2dvh;
+  width: 0.1dvw;
+  background-color: white;
 }
 .audiobtn:hover{
   transform: scale(1.2);
