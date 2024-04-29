@@ -2,20 +2,35 @@ import './App.css'
 import { Canvas, useFrame } from '@react-three/fiber'
 import { PerspectiveCamera,CameraControls, Environment, Html, Image, Circle, Box, Gltf, useGLTF, DragControls } from '@react-three/drei'
 import { useEffect, useRef, useState } from 'react'
-import { Bar } from './Bar'
 import gsap from 'gsap'
 import { Link } from 'react-router-dom'
 import { useDrag } from 'react-use-gesture'
 export default function Portal1(){
     const isMobile=window.matchMedia("only screen and (max-width: 767px)").matches
+    
     const [isPlaying,setisPlaying] =useState(true)
     const audio=useRef()
     const [curentscreen,setcurrentscreen] = useState('1')
+    const line1=useRef()
+    let animation=null
     useEffect(()=>{
+        playinganimation()
         //audio.current.play()
+        
+        //gsap.to('.line1',{height:'90%',repeat:-1})
+        //gsap.to('.line1',{height:'0%',repeat:-1,delay:1})
+
+        //tl.to('.line1',{height:'80%',duration:0.5})
+        //tl.to('.line1',{height:'0%',duration:0.5})
+        //tl.to('.line2',{height:'60%',duration:0.5})
+        //tl.to('.line2',{height:'0%',duration:0.5})
+        //tl.to('.line3',{height:'90%',duration:0.5})
+        //tl.to('.line3',{height:'0%',duration:0.5})
+
 
     },[])
     //audio.play()
+
     const camera=useRef()
     const [btn,setbtn]=useState(true)
     const [bottlescreen,setbottlescreen] = useState(false)
@@ -254,24 +269,38 @@ export default function Portal1(){
 
 
     }
+    //const tl=gsap.to('.line2',{height90^})
+    const playinganimation=()=>{
+        gsap.to('.line1',{height:'90%',repeat:-1})
+
+    }
+    const stopganimation=()=>{
+        gsap.to('.line1',{height:'50%',})
+
+    }
     const handleAudio = () => {
         if (isPlaying){
-            audio.current.pause()
+            //audio.current.pause()
+           //gsap.to('.line1',{height:'30%'})
+            stopganimation()
             setisPlaying(false)
+            
         }
         if (!isPlaying){
-            audio.current.play()
+            //audio.current.play()
+            playinganimation()
             setisPlaying(true)
 
         }
     }
+    
     return(
         <div style={{height:'100dvh',width:'100dvw',display:'flex',justifyContent:"center",alignItems:"center"}}>
         <audio src='bgmusic.mp3' ref={audio}></audio>
-        {entered && <h2 className='name'>{currentName}</h2>}
-        {!entered &&<img className='logo' src='slider.png'></img>}
-        {!entered &&<h2 className='welcome'>WELCOME TO THE</h2>}
-        {!entered &&<h2 className='spritzer'>Spritzer-Verse</h2>}
+        {entered &&   <h2 className='name'>{currentName}</h2>}
+        {!entered && !isMobile &&<img className='logo' src='slider.png'></img>}
+        {!entered && !isMobile &&<h2 className='welcome'>WELCOME TO THE</h2>}
+        {!entered && !isMobile &&<h2 className='spritzer'>Spritzer-Verse</h2>}
         
         {currentPhase==='enterScreen' && <button onClick={enter} className='enterbtn' >Enter journey</button>}
        
@@ -315,17 +344,18 @@ export default function Portal1(){
         {<button className='returnbtn'><Link style={{textDecoration:"none",color:"white"}} to={'/'}>Return to Home</Link></button>}
         
         {<div onClick={handleAudio} className='audiobtn'>
-            <div className='line1'></div>
+            <div className='line1' ref={line1}></div>
             <div className='line2'></div>
             <div className='line3'></div>
          </div>}
+         
 
         
         
-            <Canvas style={{backgroundImage:'url("bg.jpeg")',backgroundRepeat:"no-repeat",backgroundSize:"cover"}}   >
+            <Canvas style={{backgroundImage:isMobile?'url("mobilebackground.jpeg")':'url("desktopbackground_cleanup.jpeg")',backgroundRepeat:"no-repeat",backgroundSize:"cover"}}   >
                 <PerspectiveCamera   ref={camera} position={[0,-7,-45]} rotation={[0,0,0]}>
                     <CameraControls minAzimuthAngle={0*(Math.PI/180)} maxAzimuthAngle={0*(Math.PI/180)} minPolarAngle={90*(Math.PI/180)} maxPolarAngle={0*(Math.PI/180)} truckSpeed={0} maxDistance={5} minDistance={5} />
-                    
+                    <ambientLight intensity={0} color={'white'}/>
                     
                     
                     <Image ref={strawberryimage}transparent scale={[15,13,13]} position={pos1} url='/world 1.png'></Image>
@@ -351,7 +381,6 @@ export default function Portal1(){
 
     
                 </PerspectiveCamera>
-                <Environment preset='city'/>
             </Canvas>
         </div>
     )

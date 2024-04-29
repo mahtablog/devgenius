@@ -405,20 +405,23 @@
   position: absolute;
   z-index: 1;
   height: 5dvh;
-  width: 3dvw;
+  width: 2.5dvw;
   top: 90%;
   left: 5%;
-  border: 3px solid white;
-  padding: 10px 10px 10px 10px;
+  border: 2px solid white;
+  padding: 5px 5px 5px 5px;
   cursor: pointer;
   transition: 0.2s;
   border-radius: 10px;
   display: flex;
+  justify-content: space-around;
+  align-items: center;
 }
 .line1,.line2,.line3{
-  height: 2dvh;
-  width: 0.1dvw;
+  height: 0%;
+  width: 0.2dvw;
   background-color: white;
+  
 }
 .audiobtn:hover{
   transform: scale(1.2);
@@ -438,20 +441,23 @@
   width: 7dvw;
   top: 1%;
 }
+
 .welcome{
   position: absolute;
   z-index: 1;
-  font-size: 4dvh;
-  top: 15%;
+  font-size: 3dvh;
+  top: 16%;
   color: white;
   font-weight: 100;
 }
 .spritzer{
   position: absolute;
   z-index: 1;
-  font-size: 7.5dvh;
+  font-size: 12.5dvh;
   top: 18%;
+  font-style: italic;
   color: white;
+  
 }
 .bottlelogobg{
   height: 80dvh;
