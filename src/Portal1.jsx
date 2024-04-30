@@ -381,7 +381,7 @@ export default function Portal1(){
 
 
                 </PerspectiveCamera>
-                
+               <Environment preset='city'/>
             </Canvas>
         </div>
     )
@@ -515,7 +515,7 @@ const Apple=(props)=>{
 }
 
 const Strawberry=(props)=>{
-    const { scene } = useGLTF("Apple Bottle.glb");
+    const { scene } = useGLTF("rubyapple.glb");
     const bottle2=useRef()
     useFrame(()=>{
         bottle2.current.rotation.y+=0.02
