@@ -355,7 +355,7 @@ export default function Portal1(){
             <Canvas  style={{backgroundImage:isMobile?'url("mobilebackground.jpeg")':'url("desktopbackground_cleanup.jpeg")',backgroundRepeat:"no-repeat",backgroundSize:"cover"}}    >
                 <PerspectiveCamera   ref={camera} position={[0,-7,-45]} rotation={[0,0,0]}>
                     <CameraControls minAzimuthAngle={0*(Math.PI/180)} maxAzimuthAngle={0*(Math.PI/180)} minPolarAngle={90*(Math.PI/180)} maxPolarAngle={0*(Math.PI/180)} truckSpeed={0} maxDistance={5} minDistance={5} />
-                    
+                    <ambientLight intensity={1} color={'white'}/>
                     
                     
                     <Image ref={strawberryimage}transparent scale={[15,13,13]} position={pos1} url='/world 1.png'></Image>
@@ -381,7 +381,7 @@ export default function Portal1(){
 
 
                 </PerspectiveCamera>
-                <Environment preset='city'/>
+                
             </Canvas>
         </div>
     )
