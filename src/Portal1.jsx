@@ -81,7 +81,7 @@ export default function Portal1(){
     const enter=()=>{
         if (isMobile){
             gsap.to(camera.current.position,{z:-35})
-            gsap.to(camera.current.position,{y:3})
+            gsap.to(camera.current.position,{y:4})
             gsap.to(camera.current.position,{x:20})
             //gsap.to(strawberryBottle.current.position,{z:15})
 
@@ -293,7 +293,7 @@ export default function Portal1(){
 
         }
     }
-    //minAzimuthAngle={0*(Math.PI/180)} maxAzimuthAngle={0*(Math.PI/180)} minPolarAngle={90*(Math.PI/180)} maxPolarAngle={0*(Math.PI/180)} truckSpeed={0} maxDistance={5} minDistance={5}
+    //
     return(
         <div style={{height:'100dvh',width:'100dvw',display:'flex',justifyContent:"center",alignItems:"center"}}>
         <audio src='bgmusic.mp3' ref={audio}></audio>
@@ -354,8 +354,8 @@ export default function Portal1(){
         
             <Canvas  style={{backgroundImage:isMobile?'url("mobilebackground.jpeg")':'url("desktopbackground_cleanup.jpeg")',backgroundRepeat:"no-repeat",backgroundSize:"cover"}}    >
                 <PerspectiveCamera   ref={camera} position={[0,-7,-45]} rotation={[0,0,0]}>
-                    <CameraControls   />
-                    <ambientLight intensity={1} color={'white'}/>
+                    <CameraControls minAzimuthAngle={0*(Math.PI/180)} maxAzimuthAngle={0*(Math.PI/180)} minPolarAngle={90*(Math.PI/180)} maxPolarAngle={0*(Math.PI/180)} truckSpeed={0} maxDistance={5} minDistance={5}  />
+                    <directionalLight intensity={5} color={'white'}/>
                     
                     
                     <Image ref={strawberryimage}transparent scale={[15,13,13]} position={pos1} url='/world 1.png'></Image>
@@ -488,7 +488,7 @@ const Apple=(props)=>{
 
     const bottle=useRef()
     useFrame(()=>{
-        bottle.current.rotation.y+=0.02
+        bottle.current.rotation.y+=0.01
     })
     const { scene } = useGLTF("Strawberry Bottle.glb");
     const bind = useDrag(({ down, movement: [mx, my], first }) => {
@@ -517,8 +517,10 @@ const Apple=(props)=>{
 const Strawberry=(props)=>{
     const { scene } = useGLTF("apple2.glb");
     const bottle2=useRef()
+    
     useFrame(()=>{
-        bottle2.current.rotation.y+=0.05
+        bottle2.current.rotation.y+=0.01
+    
     })
     const bind = useDrag(({ down, movement: [mx, my], first }) => {
         if (!props.isMobile){
@@ -545,7 +547,7 @@ const Litchi=(props)=>{
     const { scene } = useGLTF("Litchi Bottle.glb");
     const bottle3=useRef()
     useFrame(()=>{
-        bottle3.current.rotation.y+=0.02
+        bottle3.current.rotation.y+=0.01
     })
     const bind = useDrag(({ down, movement: [mx, my], first }) => {
         if (!props.isMobile){
