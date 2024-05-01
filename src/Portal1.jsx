@@ -139,7 +139,7 @@ export default function Portal1(){
         setCurrentPhase('bottleScreen')
     }
     const closebottle=()=>{
-        console.log('clickeds')
+        
         //setbottlescreen(false)
         gsap.to(".bottlescreen",{width:"0dvw"})
         gsap.to(".bottle",{width:"0dvw"})
@@ -508,7 +508,7 @@ const Apple=(props)=>{
     return (
         
         <group ref={props.appleref}  >
-          <primitive ref={bottle} {...bind()} onMouseEnter={()=>{console.log('sss')}} object={scene} {...props} />
+          <primitive ref={bottle} {...bind()} object={scene} {...props} />
         </group>
         
       );
