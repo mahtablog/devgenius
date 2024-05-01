@@ -293,7 +293,7 @@ export default function Portal1(){
 
         }
     }
-    
+    //minAzimuthAngle={0*(Math.PI/180)} maxAzimuthAngle={0*(Math.PI/180)} minPolarAngle={90*(Math.PI/180)} maxPolarAngle={0*(Math.PI/180)} truckSpeed={0} maxDistance={5} minDistance={5}
     return(
         <div style={{height:'100dvh',width:'100dvw',display:'flex',justifyContent:"center",alignItems:"center"}}>
         <audio src='bgmusic.mp3' ref={audio}></audio>
@@ -354,7 +354,7 @@ export default function Portal1(){
         
             <Canvas  style={{backgroundImage:isMobile?'url("mobilebackground.jpeg")':'url("desktopbackground_cleanup.jpeg")',backgroundRepeat:"no-repeat",backgroundSize:"cover"}}    >
                 <PerspectiveCamera   ref={camera} position={[0,-7,-45]} rotation={[0,0,0]}>
-                    <CameraControls minAzimuthAngle={0*(Math.PI/180)} maxAzimuthAngle={0*(Math.PI/180)} minPolarAngle={90*(Math.PI/180)} maxPolarAngle={0*(Math.PI/180)} truckSpeed={0} maxDistance={5} minDistance={5} />
+                    <CameraControls   />
                     <ambientLight intensity={1} color={'white'}/>
                     
                     
@@ -515,10 +515,10 @@ const Apple=(props)=>{
 }
 
 const Strawberry=(props)=>{
-    const { scene } = useGLTF("rubyapple.glb");
+    const { scene } = useGLTF("apple2.glb");
     const bottle2=useRef()
     useFrame(()=>{
-        bottle2.current.rotation.y+=0.02
+        bottle2.current.rotation.y+=0.05
     })
     const bind = useDrag(({ down, movement: [mx, my], first }) => {
         if (!props.isMobile){
