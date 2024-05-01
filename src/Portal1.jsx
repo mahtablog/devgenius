@@ -8,16 +8,19 @@ import { useDrag } from 'react-use-gesture'
 export default function Portal1(){
     const isMobile=window.matchMedia("only screen and (max-width: 767px)").matches
     
+
     const [isPlaying,setisPlaying] =useState(true)
     const audio=useRef()
     const [curentscreen,setcurrentscreen] = useState('1')
     const line1=useRef()
-    let animation=null
     useEffect(()=>{
-        playinganimation()
+        
         //audio.current.play()
         
-        //gsap.to('.line1',{height:'90%',repeat:-1})
+       gsap.to('.line1',{scaleY:9,repeat:-1,transformOrigin:'bottom'})
+       gsap.to('.line2',{scaleY:4,repeat:-1,transformOrigin:'bottom'})
+       gsap.to('.line3',{scaleY:7,repeat:-1,transformOrigin:'bottom'})
+
         //gsap.to('.line1',{height:'0%',repeat:-1,delay:1})
 
         //tl.to('.line1',{height:'80%',duration:0.5})
@@ -269,26 +272,20 @@ export default function Portal1(){
 
 
     }
-    //const tl=gsap.to('.line2',{height90^})
-    const playinganimation=()=>{
-        gsap.to('.line1',{height:'90%',repeat:-1})
-
-    }
-    const stopganimation=()=>{
-        gsap.to('.line1',{height:'50%',})
-
-    }
+   
     const handleAudio = () => {
+        
         if (isPlaying){
-            //audio.current.pause()
-           //gsap.to('.line1',{height:'30%'})
-            stopganimation()
+            audio.current.pause()
+            gsap.to('.audiobtn',{opacity:0,duration:0.5})
+            gsap.to('.audiobtn2',{opacity:0.5,duration:0.5})
             setisPlaying(false)
             
         }
         if (!isPlaying){
-            //audio.current.play()
-            playinganimation()
+            audio.current.play()
+            gsap.to('.audiobtn',{opacity:1,duration:0.5})
+            gsap.to('.audiobtn2',{opacity:0,duration:0.5})
             setisPlaying(true)
 
         }
@@ -348,6 +345,11 @@ export default function Portal1(){
             <div className='line2'></div>
             <div className='line3'></div>
          </div>}
+         {<div onClick={handleAudio} className='audiobtn2'>
+            <div className='linee1' ref={line1}></div>
+            <div className='linee2'></div>
+            <div className='linee3'></div>
+         </div> }
          
 
         
@@ -355,7 +357,7 @@ export default function Portal1(){
             <Canvas  style={{backgroundImage:isMobile?'url("mobilebackground.jpeg")':'url("desktopbackground_cleanup.jpeg")',backgroundRepeat:"no-repeat",backgroundSize:"cover"}}    >
                 <PerspectiveCamera   ref={camera} position={[0,-7,-45]} rotation={[0,0,0]}>
                     <CameraControls minAzimuthAngle={0*(Math.PI/180)} maxAzimuthAngle={0*(Math.PI/180)} minPolarAngle={90*(Math.PI/180)} maxPolarAngle={0*(Math.PI/180)} truckSpeed={0} maxDistance={5} minDistance={5}  />
-                    <directionalLight intensity={5} color={'white'}/>
+                    <directionalLight intensity={0} color={'white'}/>
                     
                     
                     <Image ref={strawberryimage}transparent scale={[15,13,13]} position={pos1} url='/world 1.png'></Image>
@@ -515,9 +517,11 @@ const Apple=(props)=>{
 }
 
 const Strawberry=(props)=>{
-    const { scene } = useGLTF("apple2.glb");
+    const { scene } = useGLTF("untitled.glb");
     const bottle2=useRef()
-    
+    useEffect(()=>{
+        console.log(scene)
+    },[])
     useFrame(()=>{
         bottle2.current.rotation.y+=0.01
     

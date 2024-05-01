@@ -409,16 +409,16 @@
   top: 90%;
   left: 5%;
   border: 2px solid white;
-  padding: 5px 5px 5px 5px;
+  padding: 5px 5px 15px 5px;
   cursor: pointer;
   transition: 0.2s;
   border-radius: 10px;
   display: flex;
   justify-content: space-around;
-  align-items: center;
+  align-items: end;
 }
 .line1,.line2,.line3{
-  height: 0%;
+  height: 10%;
   width: 0.2dvw;
   background-color: white;
   
@@ -467,6 +467,29 @@
   opacity: 0.3;
   position: absolute;
   z-index: -1;  
+}
+.audiobtn2{
+  position: absolute;
+  z-index: 1;
+  height: 5dvh;
+  width: 2.5dvw;
+  top: 90%;
+  left: 5%;
+  border: 2px solid white;
+  padding: 5px 5px 5px 5px;
+  cursor: pointer;
+  transition: 0.2s;
+  border-radius: 10px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  opacity: 0;
+}
+.linee1,.linee2,.linee3{
+  height: 50%;
+  width: 0.2dvw;
+  background-color: white;
+  
 }
 .name {
   position: absolute;
@@ -524,6 +547,13 @@
   .audiobtn{
     width: 12dvw;
     height: 6dvh;
+  }
+  .audiobtn2{
+    width: 12dvw;
+    height: 6dvh;
+  }
+  .line1,.line2,.line3,.linee1,.linee2,.linee3{
+    width: 10%;
   }
   .logo{
     position: absolute;
