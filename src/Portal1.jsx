@@ -15,7 +15,7 @@ export default function Portal1(){
     const line1=useRef()
     useEffect(()=>{
         
-        //audio.current.play()
+        audio.current.play()
         
        gsap.to('.line1',{scaleY:9,repeat:-1,transformOrigin:'bottom'})
        gsap.to('.line2',{scaleY:4,repeat:-1,transformOrigin:'bottom'})
