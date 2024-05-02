@@ -15,7 +15,7 @@ export default function Portal1(){
     const line1=useRef()
     useEffect(()=>{
         
-        //audio.current.play()
+        audio.current.play()
         
        gsap.to('.line1',{scaleY:9,repeat:-1,transformOrigin:'bottom'})
        gsap.to('.line2',{scaleY:4,repeat:-1,transformOrigin:'bottom'})
@@ -42,13 +42,13 @@ export default function Portal1(){
     const [entered,setentered]=useState(false)
     const [currentName,setCurrentName]=useState('Ruby Apple')
 
-    const pos1=isMobile?[-12,0,-5]:[-40,5,10]
+    const pos1=isMobile?[-12,0,-5]:[-30,5,10]
     const pos2=isMobile?[0,-5,15]:[0,5,10]
-    const pos3=isMobile?[12,5,-5]:[40,5,10]
+    const pos3=isMobile?[12,5,-5]:[30,5,10]
 
-    const strawberryBottlePos=isMobile?[-12,1.5,-5]:[-39,6.2,11]
+    const strawberryBottlePos=isMobile?[-12,1.5,-5]:[-29,7,11]
     const appleBottlePos=isMobile?[0,-3,15]:[0,6.5,11]
-    const LitchiBottlePos=isMobile?[12,7,-5]:[39,6.8,11]
+    const LitchiBottlePos=isMobile?[12,7,-5]:[29,7.8,11]
 
     const appleimage=useRef()
     const strawberryimage=useRef()
@@ -112,9 +112,9 @@ export default function Portal1(){
             setentered(true)
         }
         else{
-            gsap.to(camera.current.position,{z:-17})
+            gsap.to(camera.current.position,{z:-20})
             gsap.to(camera.current.position,{y:-3})
-            gsap.to(camera.current.position,{x:40})
+            gsap.to(camera.current.position,{x:30})
             
             gsap.to(strawberryref.current.position,{z:0})
             gsap.to(strawberryref.current.position,{y:0})
@@ -355,19 +355,19 @@ export default function Portal1(){
         
         
             <Canvas  style={{backgroundImage:isMobile?'url("mobilebackground.jpeg")':'url("desktopbackground_cleanup.jpeg")',backgroundRepeat:"no-repeat",backgroundSize:"cover"}}    >
-                <PerspectiveCamera   ref={camera} position={[0,-7,-45]} rotation={[0,0,0]}>
+                <PerspectiveCamera   ref={camera} position={[0,-7,-40]} rotation={[0,0,0]}>
                     <CameraControls minAzimuthAngle={0*(Math.PI/180)} maxAzimuthAngle={0*(Math.PI/180)} minPolarAngle={90*(Math.PI/180)} maxPolarAngle={0*(Math.PI/180)} truckSpeed={0} maxDistance={5} minDistance={5}  />
                     <directionalLight intensity={0} color={'white'}/>
                     
                     
-                    <Image ref={strawberryimage}transparent scale={[15,13,13]} position={pos1} url='/world 1.png'></Image>
-                    <Image ref={appleimage} transparent scale={[15,13,13]} position={pos2} url='/world 2.png'></Image>
-                    <Image ref={litchiimage} transparent scale={[15,13,13]} position={pos3} url='/world 3.png'></Image>
+                    <Image ref={strawberryimage}transparent scale={[20,20,13]} position={pos1} url='/world 1.png'></Image>
+                    <Image ref={appleimage} transparent scale={[20,20,13]} position={pos2} url='/world 2.png'></Image>
+                    <Image ref={litchiimage} transparent scale={[20,20,13]} position={pos3} url='/world 3.png'></Image>
 
                     
-                    <Apple isMobile={isMobile}  appleref={appleref} scale={[0.6,0.6,0.6]} position={appleBottlePos}/>
-                    <Strawberry isMobile={isMobile}  strawberryref={strawberryref}  scale={[0.6,0.6,0.6]} position={strawberryBottlePos}/>
-                    <Litchi isMobile={isMobile}  litchiref={litchiref} scale={[0.6,0.6,0.6]} position={LitchiBottlePos}/>
+                    <Apple isMobile={isMobile}  appleref={appleref} scale={[0.8,0.8,0.8]} position={appleBottlePos}/>
+                    <Strawberry isMobile={isMobile}  strawberryref={strawberryref}  scale={[0.8,0.8,0.8]} position={strawberryBottlePos}/>
+                    <Litchi isMobile={isMobile}  litchiref={litchiref} scale={[0.8,0.8,0.8]} position={LitchiBottlePos}/>
 
                     {entered &&currentPhase==='pickScreen' && <TouchPoint clicked={openbottle} position={touchpoint1}/>}
                     {entered &&currentPhase==='pickScreen' && <TouchPoint clicked={openvideo} position={touchpoint2}/>}
@@ -519,9 +519,7 @@ const Apple=(props)=>{
 const Strawberry=(props)=>{
     const { scene } = useGLTF("untitled.glb");
     const bottle2=useRef()
-    useEffect(()=>{
-        console.log(scene)
-    },[])
+    
     useFrame(()=>{
         bottle2.current.rotation.y+=0.01
     
