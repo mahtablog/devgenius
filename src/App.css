@@ -427,6 +427,10 @@
   transform: scale(1.2);
   transition: 0.2s;
 }
+.audiobtn2:hover{
+  transform: scale(1.2);
+  transition: 0.2s;
+}
 .bottle{
   position: absolute;
   z-index: 1;
