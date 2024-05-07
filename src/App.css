@@ -502,6 +502,33 @@
   color: white;
   font-size: 5dvh;
 }
+.bgdefault{
+  height: 100dvh;
+  width: 100dvw;
+  position: absolute;
+  z-index: -6;
+}
+.bg1{
+  height: 100dvh;
+  width: 100dvw;
+  position: absolute;
+  z-index: -11;
+}
+.bg2{
+  height: 100dvh;
+  width: 100dvw;
+  position: absolute;
+  z-index: -10;
+  opacity: 0;
+}
+.bg3{
+  height: 100dvh;
+  width: 100dvw;
+  position: absolute;
+  z-index: -11;
+  opacity: 0;
+}
+
 @media only screen and (max-width: 767px) {
   /* Add your phone-specific styles here */
   .name {

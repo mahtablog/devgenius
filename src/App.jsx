@@ -29,12 +29,17 @@ import { Link, Route, Routes } from 'react-router-dom';
   const [scene6,setScene6]=useState(0)
   const [current,setCurrent]=useState(1)
   const links=['empty','Portal1','spritzer-saturdays-1','spritzer-experiences','shop','form/sign-up','/']
-      const pos1=[-62.5,-18.5,65,0]
-      const pos2=[-52,-18.5,65,-30]
-      const pos3=[-48,-18.5,84,-135]
-      const pos4=[-60,-18.5,90,180]
-      const pos5=[-72,-18.5,84,135]
-      const pos6=[-73,-18.5,66,30]
+  const pos1=[-62.5,-18.5,65,0]
+  const pos2=[-52,-18.5,65,-30]
+  const pos3=[-48,-18.5,84,-135]
+  const pos4=[-60,-18.5,90,180]
+  const pos5=[-72,-18.5,84,135]
+  const pos6=[-73,-18.5,66,30]
+
+  useEffect(()=>{
+    const root=document.getElementById('root')
+    root.style.display='block'
+  },[])
 
   const right=()=>{
     

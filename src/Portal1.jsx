@@ -1,10 +1,11 @@
 import './App.css'
 import { Canvas, useFrame } from '@react-three/fiber'
 import { PerspectiveCamera,CameraControls, Environment, Html, Image, Circle, Box, Gltf, useGLTF, DragControls, Cloud } from '@react-three/drei'
-import { useEffect, useRef, useState } from 'react'
+import { Suspense, useEffect, useRef, useState } from 'react'
 import gsap from 'gsap'
 import { Link } from 'react-router-dom'
 import { useDrag } from 'react-use-gesture'
+import LoadingScreen from './LoadingScreen'
 export default function Portal1(){
     const isMobile=window.matchMedia("only screen and (max-width: 767px)").matches
     
@@ -13,27 +14,6 @@ export default function Portal1(){
     const audio=useRef()
     const [curentscreen,setcurrentscreen] = useState('1')
     const line1=useRef()
-    
-    useEffect(()=>{
-        
-        audio.current.play()
-        
-       gsap.to('.line1',{scaleY:9,repeat:-1,transformOrigin:'bottom'})
-       gsap.to('.line2',{scaleY:4,repeat:-1,transformOrigin:'bottom'})
-       gsap.to('.line3',{scaleY:7,repeat:-1,transformOrigin:'bottom'})
-
-        //gsap.to('.line1',{height:'0%',repeat:-1,delay:1})
-
-        //tl.to('.line1',{height:'80%',duration:0.5})
-        //tl.to('.line1',{height:'0%',duration:0.5})
-        //tl.to('.line2',{height:'60%',duration:0.5})
-        //tl.to('.line2',{height:'0%',duration:0.5})
-        //tl.to('.line3',{height:'90%',duration:0.5})
-        //tl.to('.line3',{height:'0%',duration:0.5})
-
-
-    },[])
-    //audio.play()
 
     const camera=useRef()
     const [btn,setbtn]=useState(true)
@@ -69,18 +49,36 @@ export default function Portal1(){
     const touchpoint4=isMobile?[0,-2,20]:[-0,5.4,11]
     const touchpoint5=isMobile?[-2.5,-7.5,20]:[5,-4,11]
     const touchpoint6=isMobile?[2.5,-8,20]:[-5,-3,11]
-    const touchpoint7=isMobile?[20,-2,20]:[40,8,11]
-    const touchpoint8=isMobile?[16.3,-6.5,20]:[44,5,11]
-    const touchpoint9=isMobile?[22.7,-5.8,20]:[36,4,11]
+    const touchpoint7=isMobile?[20,-2,20]:[45,7,11]
+    const touchpoint8=isMobile?[16.3,-6.5,20]:[50,0,11]
+    const touchpoint9=isMobile?[22.7,-5.8,20]:[38,-2,11]
     
-    
-    const [hovering,setHovering]=useState(false)
+    const cloud1=useRef()
+    const cloud2=useRef()
+    const cloud3=useRef()
 
-    const rotateBottle=()=>{
-        if (hovering){
+    const [background,setBackground]=useState('desktopbackground_cleanup.jpeg')
+    useEffect(()=>{
+        
+        //root.classList.remove('main')
+        //audio.current.play()
+        
+        
+       gsap.to('.line1',{scaleY:9,repeat:-1,transformOrigin:'bottom'})
+       gsap.to('.line2',{scaleY:4,repeat:-1,transformOrigin:'bottom'})
+       gsap.to('.line3',{scaleY:7,repeat:-1,transformOrigin:'bottom'})
 
-        }
-    }
+        //gsap.to('.line1',{height:'0%',repeat:-1,delay:1})
+
+        //tl.to('.line1',{height:'80%',duration:0.5})
+        //tl.to('.line1',{height:'0%',duration:0.5})
+        //tl.to('.line2',{height:'60%',duration:0.5})
+        //tl.to('.line2',{height:'0%',duration:0.5})
+        //tl.to('.line3',{height:'90%',duration:0.5})
+        //tl.to('.line3',{height:'0%',duration:0.5})
+
+
+    },[])
     
     const enter=()=>{
         if (isMobile){
@@ -127,8 +125,11 @@ export default function Portal1(){
             gsap.to(litchiref.current.position,{y:0})
             gsap.to(litchiref.current.position,{x:14})
             gsap.to(litchiimage.current.position,{x:45})
+
+            gsap.to('.bgdefault',{opacity:0})
             setCurrentPhase("pickScreen")
             setentered(true)
+            
         }
         
     }
@@ -220,8 +221,13 @@ export default function Portal1(){
             gsap.to('.blackline1',{width:"0%"})
             gsap.to('.blackline2',{width:"0%"})
             gsap.to('.sliderimg',{left:"0%"})
+
+            gsap.to('.bg1',{opacity:1})
+            gsap.to('.bg2',{opacity:0})
+            gsap.to('.bg3',{opacity:0})
             setCurrentName('Ruby Apple')
             setcurrentscreen('1')
+            setBackground('bottle1bg.jpeg')
             
         }
         
@@ -244,8 +250,13 @@ export default function Portal1(){
             gsap.to('.blackline1',{width:"37%"})
             gsap.to('.blackline2',{width:"0%"})
             gsap.to('.sliderimg',{left:"45%"})
+
+            gsap.to('.bg1',{opacity:0})
+            gsap.to('.bg2',{opacity:1})
+            gsap.to('.bg3',{opacity:0})
             setCurrentName('Strawberry Rogue')
             setcurrentscreen('2')
+            setBackground('bottle2bg.jpeg')
 
         }
         
@@ -269,8 +280,14 @@ export default function Portal1(){
             gsap.to('.blackline1',{width:"37%"})
             gsap.to('.blackline2',{width:"40%"})
             gsap.to('.sliderimg',{left:"94%"})
+
+            gsap.to('.bg1',{opacity:0})
+            gsap.to('.bg2',{opacity:0})
+            gsap.to('.bg3',{opacity:1})
             setCurrentName('Litchi Seeche')
         setcurrentscreen('3')
+        setBackground('bottle3bg.jpeg')
+
         }
         
 
@@ -296,7 +313,8 @@ export default function Portal1(){
     }
     //minAzimuthAngle={0*(Math.PI/180)} maxAzimuthAngle={0*(Math.PI/180)} minPolarAngle={90*(Math.PI/180)} maxPolarAngle={0*(Math.PI/180)} truckSpeed={0} maxDistance={5} minDistance={5}
     return(
-        <div style={{height:'100dvh',width:'100dvw',display:'flex',justifyContent:"center",alignItems:"center"}}>
+        <Suspense fallback={<LoadingScreen/>}>
+        <div id='main' style={{height:'100dvh',width:'100dvw',display:'flex',justifyContent:"center",alignItems:"center"}}>
         <audio src='bgmusic.mp3' ref={audio}></audio>
         {entered &&   <h2 className='name'>{currentName}</h2>}
         {!entered && !isMobile &&<img className='logo' src='slider.png'></img>}
@@ -355,35 +373,29 @@ export default function Portal1(){
             <div className='linee3'></div>
          </div> }
          
+            <img  src='desktopbackground_cleanup.jpeg' className='bgdefault'></img>
+            <img  src='bottle1bg.jpeg' className='bg1'></img>
+            <img  src='bottle2bg.jpeg' className='bg2'></img>
+            <img  src='bottle3bg.jpeg' className='bg3'></img>
 
-        
-        
-            <Canvas  style={{backgroundImage:isMobile?'url("mobilebackground.jpeg")':'url("desktopbackground_cleanup.jpeg")',backgroundRepeat:"no-repeat",backgroundSize:"cover"}}    >
+            <Canvas id='canvas'  style={{}}    >
                 <PerspectiveCamera   ref={camera} position={[0,-7,-40]} rotation={[0,0,0]}>
-                    <CameraControls   />
+                    <CameraControls minAzimuthAngle={0*(Math.PI/180)} maxAzimuthAngle={0*(Math.PI/180)} minPolarAngle={90*(Math.PI/180)} maxPolarAngle={0*(Math.PI/180)} truckSpeed={0} maxDistance={5} minDistance={5}  />
                     <ambientLight intensity={3} color={'white'}/>
                     
                     
-                    <Image ref={strawberryimage}transparent scale={[20,20,13]} position={pos1} url='/world 1.png'></Image>
-                    <Image ref={appleimage} transparent scale={[20,20,13]} position={pos2} url='/world 2.png'></Image>
-                    <Image ref={litchiimage} transparent scale={[20,20,13]} position={pos3} url='/world 3.png'></Image>
+                    <Image ref={strawberryimage}transparent scale={isMobile?[15,13,13]:[20,20,13]} position={pos1} url='/world 1.png'></Image>
+                    <Image ref={appleimage} transparent scale={isMobile?[15,13,13]:[20,20,13]} position={pos2} url='/world 2.png'></Image>
+                    <Image ref={litchiimage} transparent scale={isMobile?[15,13,13]:[20,20,13]} position={pos3} url='/world 3.png'></Image>
 
                     
-                    <Apple isMobile={isMobile}  appleref={appleref} scale={[0.8,0.8,0.8]} position={appleBottlePos}/>
-                    <Strawberry isMobile={isMobile}  strawberryref={strawberryref}  scale={[0.8,0.8,0.8]} position={strawberryBottlePos}/>
-                    <Litchi isMobile={isMobile}  litchiref={litchiref} scale={[0.8,0.8,0.8]} position={LitchiBottlePos}/>
+                    <Apple isMobile={isMobile}  appleref={appleref} scale={isMobile?[0.6,0.6,0.6]:[0.8,0.8,0.8]} position={appleBottlePos}/>
+                    <Strawberry isMobile={isMobile}  strawberryref={strawberryref}  scale={isMobile?[0.6,0.6,0.6]:[0.8,0.8,0.8]} position={strawberryBottlePos}/>
+                    <Litchi isMobile={isMobile}  litchiref={litchiref} scale={isMobile?[0.6,0.6,0.6]:[0.8,0.8,0.8]} position={LitchiBottlePos}/>
 
-
-                    <Cloud scale={1} concentrate='random' growth={1} position={[-30,25,0]} speed={1} segments={4} bounds={[5, 14, 1]} volume={8} smallestVolume={1} color="white"/>
-                    <Cloud scale={1} concentrate='random' growth={1} position={[-50,25,0]} speed={1} segments={4} bounds={[5, 8, 1]} volume={8} smallestVolume={1} color="white"/>
-                    <Cloud scale={1} concentrate='random' growth={1} position={[50,25,0]} speed={1} segments={4} bounds={[5, 8, 1]} volume={8} smallestVolume={1} color="white"/>
-                    <Cloud scale={1} concentrate='random' growth={1} position={[30,25,0]} speed={1} segments={4} bounds={[5, 12, 1]} volume={8} smallestVolume={1} color="white"/>
-
-                    <Cloud scale={1} concentrate='random' growth={1} position={[-30,8,0]} speed={1} segments={6} bounds={[10, 3, 1]} volume={8} smallestVolume={1} color="white"/>
-                    <Cloud scale={1} concentrate='random' growth={1} position={[0,8,0]} speed={1} segments={10} bounds={[15, 3, 1]} volume={8} smallestVolume={1} color="white"/>
-                    <Cloud scale={1} concentrate='random' growth={1} position={[30,8,0]} speed={1} segments={6} bounds={[10, 3, 1]} volume={8} smallestVolume={1} color="white"/>
-                    <Cloud scale={1} concentrate='random' growth={1} position={[-50,8,0]} speed={1} segments={6} bounds={[10, 3, 1]} volume={8} smallestVolume={1} color="white"/>
-                    <Cloud scale={1} concentrate='random' growth={1} position={[50,8,0]} speed={1} segments={6} bounds={[10, 3, 1]} volume={8} smallestVolume={1} color="white"/>
+                    
+                    {!entered &&<Clouds/>}
+                    
 
                     {entered &&currentPhase==='pickScreen' && <TouchPoint clicked={openbottle} position={touchpoint1}/>}
                     {entered &&currentPhase==='pickScreen' && <TouchPoint clicked={openvideo} position={touchpoint2}/>}
@@ -401,7 +413,9 @@ export default function Portal1(){
                 </PerspectiveCamera>
                <Environment preset='city'/>
             </Canvas>
+        
         </div>
+        </Suspense>
     )
 }
 
@@ -485,21 +499,18 @@ const BottleScreen=({closeBottle,title,paragraph,isMobile,currentScreen})=>{
 }
 /*
 
-        <Bar rotation={[0,0*(Math.PI/180),0]} scale={[0.20,0.20,0.20]}/>
-        <Bar position={[35,0,0]} rotation={[0,0*(Math.PI/180),0]} scale={[0.20,0.20,0.20]}/>
-        <Bar position={[-35,0,0]} rotation={[0,0*(Math.PI/180),0]} scale={[0.20,0.20,0.20]}/>
-
-        <div className='statsboxes'>  </div>
-            <div className='statsboxes'></div>
-            <div className='statsboxes'></div>
-            <div className='statsboxes'></div>
-            <div className='statsboxes'> </div>
 
 
+        <Cloud scale={1.4} concentrate='random' growth={1} position={[-30,25,0]} speed={1} segments={4} bounds={[5, 14, 1]} volume={8} smallestVolume={1} color="white"/>
+                    <Cloud scale={1.4} concentrate='random' growth={1} position={[-50,25,0]} speed={1} segments={4} bounds={[5, 8, 1]} volume={8} smallestVolume={1} color="white"/>
+                    <Cloud scale={1.4} concentrate='random' growth={1} position={[50,25,0]} speed={1} segments={4} bounds={[5, 8, 1]} volume={8} smallestVolume={1} color="white"/>
+                    <Cloud scale={1.4} concentrate='random' growth={1} position={[30,25,0]} speed={1} segments={4} bounds={[5, 12, 1]} volume={8} smallestVolume={1} color="white"/>
 
-        {curentscreen==='1'&& !isMobile && <img src='bottle.png' className='bottle'></img>}
-        {curentscreen==='2'&& !isMobile && <img src='bottle3.png' className='bottle'></img>}
-        {curentscreen==='3'&& !isMobile && <img src='bottle2.png' className='bottle'></img>}
+                    <Cloud scale={1.4} concentrate='random' growth={1} position={[-30,8,0]} speed={1} segments={6} bounds={[10, 3, 1]} volume={8} smallestVolume={1} color="white"/>
+                    <Cloud scale={1.4} concentrate='random' growth={1} position={[0,8,0]} speed={1} segments={10} bounds={[15, 3, 1]} volume={8} smallestVolume={1} color="white"/>
+                    <Cloud scale={1.4} concentrate='random' growth={1} position={[30,8,0]} speed={1} segments={6} bounds={[10, 3, 1]} volume={8} smallestVolume={1} color="white"/>
+                    <Cloud scale={1.4} concentrate='random' growth={1} position={[-50,8,0]} speed={1} segments={6} bounds={[10, 3, 1]} volume={8} smallestVolume={1} color="white"/>
+                    <Cloud scale={1.4} concentrate='random' growth={1} position={[50,8,0]} speed={1} segments={6} bounds={[10, 3, 1]} volume={8} smallestVolume={1} color="white"/>
 */
 
 const Apple=(props)=>{
@@ -518,7 +529,7 @@ const Apple=(props)=>{
             }       
             gsap.to(bottle.current.position, {
             x: down ? mx / 100 : 0,
-            y: down ? (-my / 100)+6.5 : 6.5, // Use '-my' for the y-coordinate
+            y: down ? (-my / 100)+3.5 : 3.5, // Use '-my' for the y-coordinate
             duration: down ? 0 : 1,
         });
     }
@@ -548,8 +559,8 @@ const Strawberry=(props)=>{
                 setOriginalPosition(bottle2.current.position.clone());
             }       
             gsap.to(bottle2.current.position, {
-            x: down ? (mx / 100) -39: -39,
-            y: down ? (-my / 100)+6.2 : 6.2, // Use '-my' for the y-coordinate
+            x: down ? (mx / 100) -31: -31,
+            y: down ? (-my / 100)+4.2 : 4.2, // Use '-my' for the y-coordinate
             duration: down ? 0 : 1,
         });
     }
@@ -575,8 +586,8 @@ const Litchi=(props)=>{
                 setOriginalPosition(bottle3.current.position.clone());
             }       
             gsap.to(bottle3.current.position, {
-            x: down ? (mx / 100) +39: +39,
-            y: down ? (-my / 100)+6.8 : 6.8, // Use '-my' for the y-coordinate
+            x: down ? (mx / 100) +31: +31,
+            y: down ? (-my / 100)+4.8 : 4.8, // Use '-my' for the y-coordinate
             duration: down ? 0 : 1,
         });
     }
@@ -587,3 +598,36 @@ const Litchi=(props)=>{
         </group>
       );
 }
+const Clouds=()=>{
+    const c1=useRef()
+    const c2=useRef()
+    const c3=useRef()
+    useEffect(()=>{
+        const tl = gsap.timeline({ repeat: -1, yoyo: true });
+        tl.add([
+            gsap.to(c1.current.scale, { x: 57, duration: 4 }),
+            gsap.to(c1.current.scale, { y: 17, duration: 4 }),
+            gsap.to(c1.current.position, { x: 1, duration: 2 }),
+            gsap.to(c1.current.position, { y: 12, duration: 2 }),
+            //gsap.to(c2.current.scale, { x: -57, duration: 4 }),
+            gsap.to(c2.current.scale, { y: 17, duration: 4 }),
+            gsap.to(c2.current.position, { x: 42, duration: 4,delay:1 }),
+            gsap.to(c2.current.position, { y: 12, duration: 4,delay:1 }),
+            gsap.to(c3.current.scale, { x: 57, duration: 4 }),
+            gsap.to(c3.current.scale, { y: 17, duration: 4 }),
+            gsap.to(c3.current.position, { x: -42, duration: 4,delay:0.5 }),
+            gsap.to(c3.current.position, { y: 12, duration: 4,delay:0.5 }),
+          ]);
+        //gsap.to('.c1',{scaleX:100})
+    },[])
+    
+    return (
+
+    <>
+        <Image  ref={c1} scale={[55,15,25]} transparent position={[0,15,0]} url='CLOUD 1.png'/>
+        <Image  ref={c2} scale={[55,15,25]} transparent position={[40,15,0]} url='CLOUD 2.png'/>
+        <Image  ref={c3} scale={[55,15,25]} transparent position={[-40,15,0]} url='CLOUD 3.png'/>
+    </>
+    )
+}
+
