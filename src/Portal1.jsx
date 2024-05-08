@@ -397,17 +397,17 @@ export default function Portal1(){
                     {!entered &&<Clouds/>}
                     
 
-                    {entered &&currentPhase==='pickScreen' && <TouchPoint clicked={openbottle} position={touchpoint1}/>}
-                    {entered &&currentPhase==='pickScreen' && <TouchPoint clicked={openvideo} position={touchpoint2}/>}
-                    {entered &&currentPhase==='pickScreen' && <TouchPoint clicked={openplaylist} position={touchpoint3}/>}
+                    {entered &&currentPhase==='pickScreen' && <TouchPoint enter={entered} clicked={openbottle} position={touchpoint1}/>}
+                    {entered &&currentPhase==='pickScreen' && <TouchPoint enter={entered} clicked={openvideo} position={touchpoint2}/>}
+                    {entered &&currentPhase==='pickScreen' && <TouchPoint enter={entered} clicked={openplaylist} position={touchpoint3}/>}
 
-                    {entered &&currentPhase==='pickScreen' && <TouchPoint clicked={openbottle} position={touchpoint4}/>}
-                    {entered &&currentPhase==='pickScreen' && <TouchPoint clicked={openvideo} position={touchpoint5}/>}
-                    {entered &&currentPhase==='pickScreen' && <TouchPoint clicked={openplaylist} position={touchpoint6}/>}
+                    {entered &&currentPhase==='pickScreen' && <TouchPoint enter={entered} clicked={openbottle} position={touchpoint4}/>}
+                    {entered &&currentPhase==='pickScreen' && <TouchPoint enter={entered} clicked={openvideo} position={touchpoint5}/>}
+                    {entered &&currentPhase==='pickScreen' && <TouchPoint enter={entered} clicked={openplaylist} position={touchpoint6}/>}
 
-                    {entered &&currentPhase==='pickScreen' && <TouchPoint clicked={openbottle} position={touchpoint7}/>}
-                    {entered &&currentPhase==='pickScreen' && <TouchPoint clicked={openvideo} position={touchpoint8}/>}
-                    {entered &&currentPhase==='pickScreen' && <TouchPoint clicked={openplaylist} position={touchpoint9}/>}
+                    {entered &&currentPhase==='pickScreen' && <TouchPoint enter={entered} clicked={openbottle} position={touchpoint7}/>}
+                    {entered &&currentPhase==='pickScreen' && <TouchPoint enter={entered} clicked={openvideo} position={touchpoint8}/>}
+                    {entered &&currentPhase==='pickScreen' && <TouchPoint enter={entered} clicked={openplaylist} position={touchpoint9}/>}
 
 
                 </PerspectiveCamera>
@@ -419,18 +419,35 @@ export default function Portal1(){
     )
 }
 
-const TouchPoint=({position,clicked})=>{
+const TouchPoint=({position,clicked,enter})=>{
+    const point=useRef()
+    const point2=useRef()
+    const dot=useRef()
+    useEffect(()=>{
+        const tl = gsap.timeline({ repeat: -1, yoyo: true });
+        
+        tl.add([
+            gsap.to(point.current.scale, { x: 0.3, duration: 1 }),
+            gsap.to(point.current.scale, { y: 0.3, duration: 1 }),
+            gsap.to(point2.current.scale, { x: 0.4, duration: 1 }),
+            gsap.to(point2.current.scale, { y: 0.4, duration: 1 }),
+            gsap.to(dot.current.scale, { x: 0.2, duration: 1 }),
+            gsap.to(dot.current.scale, { y: 0.2, duration: 1 }),
+          ]);
+    },[])
+    
+
     return (
     <group onClick={clicked}>
-        <mesh visible position={position} rotation={[0, 0, 0]} castShadow scale={[0.2,0.2,0.2]}>
+        <mesh ref={point} visible position={position} rotation={[0, 0, 0]} castShadow scale={[0.2,0.2,0.2]}>
             <ringGeometry   args={[3.8, 4, 28]} />
             <meshBasicMaterial attach="material" color="white" />
         </mesh>
-        <mesh visible position={position} rotation={[0, 0, 0]} castShadow scale={[0.3,0.3,0.3]}>
+        <mesh ref={point2} visible position={position} rotation={[0, 0, 0]} castShadow scale={[0.3,0.3,0.3]}>
             <ringGeometry   args={[3.8, 4, 28]} />
             <meshBasicMaterial attach="material" color="white" />
         </mesh>
-        <Circle material-color={'white'} scale={[0.1,0.1,0.1]} position={position}></Circle>
+        <Circle ref={dot} material-color={'white'} scale={[0.1,0.1,0.1]} position={position}></Circle>
         <Circle visible={false} scale={[1.2,1.2,1.2]} material-color={'black'} position={position}></Circle>
     </group>
     )
@@ -532,6 +549,9 @@ const Apple=(props)=>{
             y: down ? (-my / 100)+3.5 : 3.5, // Use '-my' for the y-coordinate
             duration: down ? 0 : 1,
         });
+    }
+    else{
+        
     }
     });
     return (
