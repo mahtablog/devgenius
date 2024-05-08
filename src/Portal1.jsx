@@ -438,7 +438,7 @@ const TouchPoint=({position,clicked,enter})=>{
     
 
     return (
-    <group onClick={clicked}>
+    <group onClick={clicked} >
         <mesh ref={point} visible position={position} rotation={[0, 0, 0]} castShadow scale={[0.2,0.2,0.2]}>
             <ringGeometry   args={[3.8, 4, 28]} />
             <meshBasicMaterial attach="material" color="white" />
@@ -448,7 +448,7 @@ const TouchPoint=({position,clicked,enter})=>{
             <meshBasicMaterial attach="material" color="white" />
         </mesh>
         <Circle ref={dot} material-color={'white'} scale={[0.1,0.1,0.1]} position={position}></Circle>
-        <Circle visible={false} scale={[1.2,1.2,1.2]} material-color={'black'} position={position}></Circle>
+        <Circle onPointerOver={()=>document.body.style.cursor="pointer"} onPointerLeave={()=>document.body.style.cursor="auto"} visible={false} scale={[1.6,1.6,1.6]} material-color={'black'} position={position}></Circle>
     </group>
     )
 }
@@ -548,10 +548,12 @@ const Apple=(props)=>{
             x: down ? mx / 100 : 0,
             y: down ? (-my / 100)+3.5 : 3.5, // Use '-my' for the y-coordinate
             duration: down ? 0 : 1,
-        });
+        }
+    
+    );
     }
     else{
-        
+
     }
     });
     return (
