@@ -104,7 +104,7 @@ export default function Portal1(){
             gsap.to(litchiimage.current.position,{y:-5})
             gsap.to(litchiimage.current.position,{x:20})
 
-
+            gsap.to('.bgdefault',{opacity:0})
 
             //gsap.to(strawberryimage.current.position,{z:-5})
             setCurrentPhase("pickScreen")
@@ -212,6 +212,10 @@ export default function Portal1(){
             gsap.to('.blackline1',{width:"0%"})
             gsap.to('.blackline2',{width:"0%"})
             gsap.to('.sliderimg',{left:"-1%"})
+
+            gsap.to('.bg1',{opacity:1})
+            gsap.to('.bg2',{opacity:0})
+            gsap.to('.bg3',{opacity:0})
             setCurrentName('Ruby Apple')
 
             setcurrentscreen('1')
@@ -241,6 +245,10 @@ export default function Portal1(){
             gsap.to('.blackline1',{width:"30%"})
             gsap.to('.blackline2',{width:"0%"})
             gsap.to('.sliderimg',{left:"41%"})
+
+            gsap.to('.bg1',{opacity:0})
+            gsap.to('.bg2',{opacity:1})
+            gsap.to('.bg3',{opacity:0})
             setcurrentscreen('2')
             setCurrentName('Strawberry Rogue')
 
@@ -271,6 +279,10 @@ export default function Portal1(){
             gsap.to('.blackline1',{width:"30%"})
             gsap.to('.blackline2',{width:"30%"})
             gsap.to('.sliderimg',{left:"83%"})
+
+            gsap.to('.bg1',{opacity:0})
+            gsap.to('.bg2',{opacity:0})
+            gsap.to('.bg3',{opacity:1})
             setCurrentName('Litchi Seeche')
 
             setcurrentscreen('3')
@@ -389,7 +401,7 @@ export default function Portal1(){
                     <Image ref={litchiimage} transparent scale={isMobile?[15,13,13]:[20,20,13]} position={pos3} url='/world 3.png'></Image>
 
                     
-                    <Apple isMobile={isMobile}  appleref={appleref} scale={isMobile?[0.6,0.6,0.6]:[0.8,0.8,0.8]} position={appleBottlePos}/>
+                    <Apple entered={entered} isMobile={isMobile}  appleref={appleref} scale={isMobile?[0.6,0.6,0.6]:[0.8,0.8,0.8]} position={appleBottlePos}/>
                     <Strawberry isMobile={isMobile}  strawberryref={strawberryref}  scale={isMobile?[0.6,0.6,0.6]:[0.8,0.8,0.8]} position={strawberryBottlePos}/>
                     <Litchi isMobile={isMobile}  litchiref={litchiref} scale={isMobile?[0.6,0.6,0.6]:[0.8,0.8,0.8]} position={LitchiBottlePos}/>
 
@@ -535,26 +547,42 @@ const Apple=(props)=>{
     const bottle=useRef()
     useFrame(()=>{
         bottle.current.rotation.y+=0.01
+        console.log(props.entered && props.isMobile)
     })
     const { scene } = useGLTF("Strawberry Bottle.glb");
     const bind = useDrag(({ down, movement: [mx, my], first }) => {
         if (!props.isMobile){
-
             if (first) 
             {
                 setOriginalPosition(bottle.current.position.clone());
             }       
+            console.log('desktop')
+
             gsap.to(bottle.current.position, {
             x: down ? mx / 100 : 0,
             y: down ? (-my / 100)+3.5 : 3.5, // Use '-my' for the y-coordinate
             duration: down ? 0 : 1,
         }
     
-    );
-    }
+        );
+        }
     else{
-
+        if (props.isMobile){
+            console.log('mobile')
+            if (first) 
+            {
+                setOriginalPosition(bottle.current.position.clone());
+            }       
+            gsap.to(bottle.current.position, {
+            x: down ? mx / 100 :40,
+            y: down ? (-my /100)+2.5 : 53.5, // Use '-my' for the y-coordinate
+            duration: down ? 0 : 1,
+        }
+    
+        );
     }
+    }
+    
     });
     return (
         
